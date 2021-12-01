@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
+import 'package:unibike/ui/register-page.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login_page';
@@ -149,7 +150,8 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           Text("Don't have an account?"),
                           TextButton(
-                              onPressed: () {},
+                              onPressed: () {Navigator.pushNamed(context, RegisterPage.routeName);
+                              },
                               child: Text(
                                 "Register",
                                 style: TextStyle(color: secondaryColor),

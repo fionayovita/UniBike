@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/ui/login_page.dart';
+import 'package:unibike/ui/register-page.dart';
 import 'package:unibike/ui/splash_screen.dart';
 
 void main() async {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName: (context) => SplashScreen(),
         LoginPage.routeName: (context) => LoginPage(),
+        RegisterPage.routeName: (context) => RegisterPage(),
       },
     );
   }
