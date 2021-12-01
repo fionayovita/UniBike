@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
+import 'package:unibike/ui/login_page.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/splash_screen';
@@ -47,5 +50,12 @@ class _SplashScreenState extends State<SplashScreen>
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 5),
+        () => Navigator.pushReplacementNamed(context, LoginPage.routeName));
   }
 }
