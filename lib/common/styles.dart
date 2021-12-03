@@ -22,20 +22,14 @@ final TextTheme myTextTheme = TextTheme(
       letterSpacing: 0.25,
       color: darkPrimaryColor),
   headline3: GoogleFonts.poppins(
-      fontSize: 23, 
-      fontWeight: FontWeight.bold, 
-      color: primaryColor),
+      fontSize: 23, fontWeight: FontWeight.bold, color: primaryColor),
   headline4: GoogleFonts.poppins(
-      fontSize: 21, 
-      fontWeight: FontWeight.bold, 
-      color: primaryColor),    
+      fontSize: 21, fontWeight: FontWeight.bold, color: primaryColor),
   headline5: GoogleFonts.poppins(
-      fontSize: 18, 
-      fontWeight: FontWeight.bold, 
-      color: darkPrimaryColor),
+      fontSize: 18, fontWeight: FontWeight.bold, color: darkPrimaryColor),
   headline6: GoogleFonts.rubik(
-      fontSize: 18, 
-      fontWeight: FontWeight.w500, 
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
       color: primaryColor,
       letterSpacing: 0.15),
   subtitle1: GoogleFonts.poppins(
@@ -49,8 +43,8 @@ final TextTheme myTextTheme = TextTheme(
       letterSpacing: 0.1,
       color: primaryColor),
   bodyText1: GoogleFonts.poppins(
-      fontSize: 15, 
-      fontWeight: FontWeight.w400, 
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
       color: darkPrimaryColor,
       letterSpacing: 0.5),
   bodyText2: GoogleFonts.poppins(
@@ -76,5 +70,28 @@ final themeData = ThemeData(
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     selectedItemColor: secondaryColor,
     unselectedItemColor: Colors.grey,
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    fillColor: Colors.amber,
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(width: 2.0, color: greyOutline),
+      borderRadius: BorderRadius.circular(25),
+    ),
+    disabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(width: 2.0, color: Colors.red),
+      borderRadius: BorderRadius.circular(25),
+    ),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0),
+      borderSide: BorderSide(color: greyOutline, width: 2.0),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0),
+      borderSide: BorderSide(color: primaryColor, width: 2.0),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0),
+      borderSide: BorderSide(color: Colors.red, width: 2.0),
+    ),
   ),
 );
