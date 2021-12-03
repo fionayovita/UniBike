@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/ui/bike_detail_page.dart';
+import 'package:unibike/ui/home_page.dart';
 import 'package:unibike/ui/login_page.dart';
 import 'package:unibike/ui/main_page.dart';
 import 'package:unibike/ui/register_page.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashScreen.routeName,
       routes: {
         SplashScreen.routeName: (context) => SplashScreen(),
+        HomePage.routeName: (context) => HomePage(),
         LoginPage.routeName: (context) => LoginPage(),
         RegisterPage.routeName: (context) => RegisterPage(),
         MainPage.routeName: (context) => MainPage(),

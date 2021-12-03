@@ -26,28 +26,6 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _obscureText = true;
   bool _isLoading = false;
 
-  // Future<void> addUser() {
-  //   final email = _emailController.text;
-  //   final password = _passwordController.text;
-  //   final nama = _namaController.text;
-  //   final npm = _npmController.text;
-  //   final prodi = _prodiController.text;
-  //   final fakultas = _fakultasController.text;
-
-  //   // Call the user's CollectionReference to add a new user
-  //   return users
-  //       .add({
-  //         'email': email,
-  //         'password': password,
-  //         'nama': nama,
-  //         'npm': npm,
-  //         'prodi': prodi,
-  //         'fakultas': fakultas
-  //       })
-  //       .then((value) => print("User Added"))
-  //       .catchError((error) => print("Failed to add user: $error"));
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

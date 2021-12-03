@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
+import 'package:unibike/ui/home_page.dart';
 import 'package:unibike/ui/main_page.dart';
 import 'package:unibike/ui/register_page.dart';
 
@@ -162,7 +163,8 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                       MaterialButton(
-                        child: Text('Login', style: Theme.of(context).textTheme.subtitle1),
+                        child: Text('Login',
+                            style: Theme.of(context).textTheme.subtitle1),
                         color: Theme.of(context).primaryColor,
                         textTheme: ButtonTextTheme.primary,
                         height: 50,
@@ -173,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () async {
                           setState(() {
                             _isLoading = true;
-                            Navigator.pushNamed(context, MainPage.routeName);
+                            Navigator.pushNamed(context, HomePage.routeName);
                           });
                           try {
                             final email = _emailController.text;
