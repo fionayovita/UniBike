@@ -1,10 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
+import 'package:unibike/ui/bike_detail_page.dart';
 import 'package:unibike/ui/login_page.dart';
 import 'package:unibike/ui/main_page.dart';
 import 'package:unibike/ui/register-page.dart';
 import 'package:unibike/ui/splash_screen.dart';
+
+import 'model/bike_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +26,9 @@ class MyApp extends StatelessWidget {
         LoginPage.routeName: (context) => LoginPage(),
         RegisterPage.routeName: (context) => RegisterPage(),
         MainPage.routeName: (context) => MainPage(),
+        BikeDetailPage.routeName: (context) => BikeDetailPage(
+              bike: ModalRoute.of(context)?.settings.arguments as Bike,
+            ),
       },
     );
   }

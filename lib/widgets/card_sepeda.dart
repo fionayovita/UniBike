@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/model/bike_model.dart';
+import 'package:unibike/ui/bike_detail_page.dart';
 
 class CardSepeda extends StatelessWidget {
   final Bike bike;
@@ -11,7 +12,9 @@ class CardSepeda extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, BikeDetailPage.routeName, arguments: bike);
+      },
       child: Card(
         elevation: 2,
         shadowColor: greyButton,
