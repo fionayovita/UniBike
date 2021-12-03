@@ -4,7 +4,7 @@ import 'package:unibike/common/styles.dart';
 import 'package:unibike/ui/bike_detail_page.dart';
 import 'package:unibike/ui/login_page.dart';
 import 'package:unibike/ui/main_page.dart';
-import 'package:unibike/ui/register-page.dart';
+import 'package:unibike/ui/register_page.dart';
 import 'package:unibike/ui/splash_screen.dart';
 
 import 'model/bike_model.dart';
