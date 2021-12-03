@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
+import 'package:unibike/ui/main_page.dart';
 import 'package:unibike/ui/register-page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -150,7 +151,9 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           Text("Don't have an account?"),
                           TextButton(
-                              onPressed: () {Navigator.pushNamed(context, RegisterPage.routeName);
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, RegisterPage.routeName);
                               },
                               child: Text(
                                 "Register",
@@ -170,6 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () async {
                           setState(() {
                             _isLoading = true;
+                            Navigator.pushNamed(context, MainPage.routeName);
                           });
                           try {
                             final email = _emailController.text;

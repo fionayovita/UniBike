@@ -1,57 +1,74 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:unibike/common/styles.dart';
 
 class DropDownMenu extends StatefulWidget {
   @override
-  _DropDownState createState() => _DropDownState();
+  State<DropDownMenu> createState() => DropDownMenuState();
 }
 
-class _DropDownState extends State<DropDownMenu> {
+class DropDownMenuState extends State<DropDownMenu> {
   String? fakultas;
-  // _DropDownState({required this.fakultas});
+  int lengthBike = 30;
+
+  List _listFakultas = [
+    "Teknik",
+    "MIPA",
+    "Ekonomi",
+    "Kedokteran",
+    "Pertanian",
+    "Keguruan dan Ilmu Pendidikan",
+    "Ilmu Sosial dan Pemerintahan",
+    "Hukum"
+  ];
+
+  int lengthFakultas() {
+    int length = lengthBike;
+    if (fakultas == 'Teknik') {
+      length = 2;
+    } else if (fakultas == 'MIPA') {
+      length = 6;
+    } else if (fakultas == 'Ekonomi') {
+      length = 1;
+    } else if (fakultas == 'Kedokteran') {
+      lengthBike = 7;
+    } else if (fakultas == 'Pertanian') {
+      lengthBike = 7;
+    } else if (fakultas == 'Keguruan dan Ilmu Pendidikan') {
+      length = 12;
+    } else if (fakultas == 'Ilmu Sosial dan Pemerintahan') {
+      length = 4;
+    } else if (fakultas == 'Hukum') {
+      length = 9;
+    } else {
+      print(fakultas);
+      length;
+    }
+    lengthBike = length;
+    return length;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: DropdownButton<String>(
-        items: <DropdownMenuItem<String>>[
-          DropdownMenuItem<String>(
-            value: 'Teknik',
-            child: Text('Teknik'),
-          ),
-          DropdownMenuItem<String>(
-            value: 'MIPA',
-            child: Text('MIPA'),
-          ),
-          DropdownMenuItem<String>(
-            value: 'Kedokteran',
-            child: Text('Kedokteran'),
-          ),
-          DropdownMenuItem<String>(
-            value: 'Ekonomi',
-            child: Text('Ekonomi'),
-          ),
-          DropdownMenuItem<String>(
-            value: 'Pertanian',
-            child: Text('Pertanian'),
-          ),
-          DropdownMenuItem<String>(
-            value: 'Ilmu Sosial dan Pemerintahan',
-            child: Text('Ilmu Sosial dan Pemerintahan'),
-          ),
-          DropdownMenuItem<String>(
-            value: 'Keguruan dan Ilmu Pendidikan',
-            child: Text('Keguruan dan Ilmu Pendidikan'),
-          ),
-        ],
-        value: fakultas,
-        hint: Text('Pilih Fakultas'),
-        onChanged: (String? value) {
-          setState(() {
-            fakultas = value;
-          });
-        },
-      ),
+    return DropdownButton(
+      iconEnabledColor: primaryColor,
+      dropdownColor: secondaryColor,
+      hint:
+          Text("Pilih Fakultas", style: Theme.of(context).textTheme.subtitle1),
+      value: fakultas,
+      items: _listFakultas.map((value) {
+        return DropdownMenuItem(
+          child: Text(value),
+          value: value,
+        );
+      }).toList(),
+      onChanged: (value) {
+        setState(() {
+          fakultas = value as String?;
+          lengthFakultas();
+          lengthBike = lengthFakultas();
+        });
+      },
     );
   }
 }
