@@ -34,12 +34,12 @@ class _MainPageState extends State<MainPage> {
             children: [
               Text(
                 "Hi! Bikers",
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.headline5,
               ),
               SizedBox(height: 15.0),
               Text(
                 "Find a Bike to go\naround the Campus",
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headline2,
               ),
               SizedBox(height: 25.0),
               Container(

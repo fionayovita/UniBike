@@ -34,7 +34,7 @@ class CardSepeda extends StatelessWidget {
                 bike.title!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.subtitle2,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
             )
           ],

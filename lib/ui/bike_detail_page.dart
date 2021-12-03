@@ -52,22 +52,23 @@ class BikeDetailPage extends StatelessWidget {
                 children: [
                   Text(
                     bike.title ?? '-',
-                    style: Theme.of(context).textTheme.headline4,
+                    style: Theme.of(context).textTheme.headline2,
                   ),
-                  SizedBox(height: 20),
+                  Divider(color: darkPrimaryColor),
+                  SizedBox(height: 30),
                   Text(
                     'Id Sepeda: $id',
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.headline5,
                   ),
                   SizedBox(height: 5),
                   Text(
                     'Jenis Sepeda: ${bike.frameModel ?? "-"}',
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.headline5,
                   ),
                   SizedBox(height: 80),
                   Text(
                     'Keterangan:',
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                   SizedBox(height: 5),
                   Text(

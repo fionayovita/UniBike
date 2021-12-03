@@ -16,29 +16,45 @@ final TextTheme myTextTheme = TextTheme(
       fontWeight: FontWeight.bold,
       letterSpacing: 0.25,
       color: secondaryColor),
-  headline4: GoogleFonts.poppins(
+  headline2: GoogleFonts.poppins(
       fontSize: 32,
       fontWeight: FontWeight.bold,
       letterSpacing: 0.25,
       color: darkPrimaryColor),
+  headline3: GoogleFonts.poppins(
+      fontSize: 23, 
+      fontWeight: FontWeight.bold, 
+      color: primaryColor),
+  headline4: GoogleFonts.poppins(
+      fontSize: 21, 
+      fontWeight: FontWeight.bold, 
+      color: primaryColor),    
   headline5: GoogleFonts.poppins(
-      fontSize: 23, fontWeight: FontWeight.bold, color: primaryColor),
+      fontSize: 18, 
+      fontWeight: FontWeight.bold, 
+      color: darkPrimaryColor),
   headline6: GoogleFonts.rubik(
-      fontSize: 18, fontWeight: FontWeight.w500, letterSpacing: 0.15),
+      fontSize: 18, 
+      fontWeight: FontWeight.w500, 
+      color: primaryColor,
+      letterSpacing: 0.15),
   subtitle1: GoogleFonts.poppins(
       fontSize: 15,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w600,
       letterSpacing: 0.15,
-      color: primaryColor),
+      color: darkPrimaryColor),
   subtitle2: GoogleFonts.poppins(
       fontSize: 13,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w400,
       letterSpacing: 0.1,
-      color: darkPrimaryColor),
+      color: primaryColor),
   bodyText1: GoogleFonts.poppins(
-      fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.5),
+      fontSize: 15, 
+      fontWeight: FontWeight.w400, 
+      color: darkPrimaryColor,
+      letterSpacing: 0.5),
   bodyText2: GoogleFonts.poppins(
-      fontSize: 14,
+      fontSize: 13,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.25,
       color: Colors.white),

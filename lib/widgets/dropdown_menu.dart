@@ -54,11 +54,11 @@ class DropDownMenuState extends State<DropDownMenu> {
       iconEnabledColor: primaryColor,
       dropdownColor: secondaryColor,
       hint:
-          Text("Pilih Fakultas", style: Theme.of(context).textTheme.subtitle1),
+          Text("Pilih Fakultas", style: Theme.of(context).textTheme.subtitle2),
       value: fakultas,
       items: _listFakultas.map((value) {
         return DropdownMenuItem(
-          child: Text(value),
+          child: Text(value, style: Theme.of(context).textTheme.subtitle2),
           value: value,
         );
       }).toList(),
