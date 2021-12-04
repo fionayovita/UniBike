@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/ui/login_page.dart';
 import 'package:unibike/ui/main_page.dart';
+import 'package:unibike/ui/profile_page.dart';
 import 'package:unibike/ui/register_page.dart';
+import 'package:unibike/ui/status_pinjam_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = 'home_page';
@@ -39,8 +41,8 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _listPages = [
     MainPage(),
-    LoginPage(),
-    RegisterPage(),
+    StatusPinjamPage(),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -50,26 +52,43 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  @override
-  void initState() {
-    _pageController = PageController(initialPage: 0);
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   _pageController = PageController(initialPage: 0);
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _listPages[_bottomNavIndex],
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: secondaryColor,
-        buttonBackgroundColor: primaryColor,
+        backgroundColor: primaryColor,
+        buttonBackgroundColor: secondaryColor,
+        color: secondaryColor,
         height: 60,
         items: <Widget>[
-          Icon(Icons.home, size: 30),
-          Icon(Icons.note_alt_outlined, size: 30),
-          Icon(Icons.person_sharp, size: 30),
+          Icon(
+            Icons.home,
+            size: 30,
+            color: primaryColor,
+          ),
+          Icon(
+            Icons.note_alt_outlined,
+            size: 30,
+            color: primaryColor,
+          ),
+          Icon(
+            Icons.person_sharp,
+            size: 30,
+            color: primaryColor,
+          ),
         ],
-        onTap: (index) => _onItemTapped(index),
+        onTap: (selected) {
+          setState(() {
+            _bottomNavIndex = selected;
+          });
+        },
       ),
     );
   }
