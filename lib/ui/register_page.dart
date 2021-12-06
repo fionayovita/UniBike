@@ -136,17 +136,17 @@ class _RegisterPageState extends State<RegisterPage> {
 
                       await _auth.createUserWithEmailAndPassword(
                           email: email, password: password);
-                      //   .then((value) async {
-                      // User user = _auth.currentUser!;
 
-                      _store.collection('users').add({
+                      _store
+                          .collection('users')
+                          .doc(_auth.currentUser?.uid)
+                          .set({
                         'email': email,
                         'password': password,
                         'nama': nama,
                         'npm': npm,
                         'prodi': prodi,
                         'fakultas': fakultas
-                        // });
                       });
                       Navigator.pop(context);
                     } catch (e) {
