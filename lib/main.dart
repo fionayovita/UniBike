@@ -5,8 +5,10 @@ import 'package:unibike/ui/bike_detail_page.dart';
 import 'package:unibike/ui/home_page.dart';
 import 'package:unibike/ui/login_page.dart';
 import 'package:unibike/ui/main_page.dart';
+import 'package:unibike/ui/profile_page.dart';
 import 'package:unibike/ui/register_page.dart';
 import 'package:unibike/ui/splash_screen.dart';
+import 'package:unibike/ui/status_pinjam_page.dart';
 
 import 'model/bike_model.dart';
 
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
         HomePage.routeName: (context) => HomePage(),
         LoginPage.routeName: (context) => LoginPage(),
         RegisterPage.routeName: (context) => RegisterPage(),
+        StatusPinjamPage.routeName: (context) => StatusPinjamPage(),
+        ProfilePage.routeName: (context) => ProfilePage(),
         MainPage.routeName: (context) => MainPage(),
         BikeDetailPage.routeName: (context) => BikeDetailPage(
               bike: ModalRoute.of(context)?.settings.arguments as Bike,

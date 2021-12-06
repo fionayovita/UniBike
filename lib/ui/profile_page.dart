@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
+import 'package:unibike/ui/login_page.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = 'profile_page';
@@ -145,7 +146,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await firebase.signOut();
+                        Navigator.pushReplacementNamed(
+                            context, LoginPage.routeName);
+                      },
                     ),
                   ],
                 );

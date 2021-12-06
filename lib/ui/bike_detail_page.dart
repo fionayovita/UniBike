@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/model/bike_model.dart';
+import 'package:unibike/ui/status_pinjam_page.dart';
 
 class BikeDetailPage extends StatelessWidget {
   static const routeName = 'detail_page';
@@ -81,6 +82,8 @@ class BikeDetailPage extends StatelessWidget {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                         onPressed: () {
+                          Navigator.pushNamed(
+                              context, StatusPinjamPage.routeName);
                           final snackBar = SnackBar(
                             content: Text(
                               'Sukses Pinjam Sepeda dengan id: $id',
