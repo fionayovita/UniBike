@@ -3,11 +3,12 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
-import 'package:unibike/ui/home_page.dart';
+import 'package:unibike/model/bike_model.dart';
 import 'package:unibike/ui/login_page.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/splash_screen';
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }

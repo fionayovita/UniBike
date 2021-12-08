@@ -1,19 +1,33 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/model/bike_model.dart';
 import 'package:unibike/ui/status_pinjam_page.dart';
+import 'package:unibike/widgets/dropdown_menu.dart';
 
-class BikeDetailPage extends StatelessWidget {
+class BikeDetailPage extends StatefulWidget {
   static const routeName = 'detail_page';
 
+  final firebase = FirebaseAuth.instance;
+  final _store = FirebaseFirestore.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  String fakultas = '';
+
   final Bike bike;
-  const BikeDetailPage({required this.bike});
+  BikeDetailPage({required this.bike});
 
   @override
+  State<BikeDetailPage> createState() => _BikeDetailPageState();
+}
+
+class _BikeDetailPageState extends State<BikeDetailPage> {
+  @override
   Widget build(BuildContext context) {
-    var id = bike.id;
+    var id = widget.bike.id;
     final width = MediaQuery.of(context).size.width;
+    String emailUser = widget.firebase.currentUser!.email.toString();
 
     return Scaffold(
       backgroundColor: whiteBackground,
@@ -24,9 +38,9 @@ class BikeDetailPage extends StatelessWidget {
               width: width,
               height: 400,
               child: Hero(
-                tag: bike.largeImg!,
+                tag: widget.bike.largeImg!,
                 child: Image.network(
-                  bike.largeImg!,
+                  widget.bike.largeImg!,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -52,7 +66,7 @@ class BikeDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    bike.title ?? '-',
+                    widget.bike.title ?? '-',
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   Divider(color: darkPrimaryColor),
@@ -63,7 +77,7 @@ class BikeDetailPage extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Jenis Sepeda: ${bike.frameModel ?? "-"}',
+                    'Jenis Sepeda: ${widget.bike.frameModel ?? "-"}',
                     style: Theme.of(context).textTheme.headline5,
                   ),
                   SizedBox(height: 80),
@@ -82,15 +96,48 @@ class BikeDetailPage extends StatelessWidget {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(
-                              context, StatusPinjamPage.routeName);
-                          final snackBar = SnackBar(
-                            content: Text(
-                              'Sukses Pinjam Sepeda dengan id: $id',
-                              style: Theme.of(context).textTheme.subtitle1,
-                            ),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          bool _isLoading = false;
+                          try {
+                            final jenisSepeda = widget.bike.frameModel;
+                            DropDownMenu(onChanged: (value) {
+                              widget.fakultas = value;
+                            });
+                            print('di detail: ${widget.fakultas}');
+
+                            widget._store
+                                .collection('data_peminjaman')
+                                .doc('1')
+                                .set({
+                              'id_sepeda': id,
+                              'jenis_sepeda': jenisSepeda,
+                              'email_peminjam': emailUser,
+                              'fakultas': widget.fakultas
+                            });
+
+                            Navigator.pushNamed(
+                                context, StatusPinjamPage.routeName,
+                                arguments: widget.bike);
+
+                            final snackBar = SnackBar(
+                              content: Text(
+                                'Sukses Pinjam Sepeda dengan id: $id',
+                                style: Theme.of(context).textTheme.subtitle2,
+                              ),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          } catch (e) {
+                            final snackbar =
+                                SnackBar(content: Text(e.toString()));
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackbar);
+                          } finally {
+                            setState(() {
+                              widget.fakultas;
+                              print('di finally: ${widget.fakultas}');
+                              _isLoading = false;
+                            });
+                          }
                         },
                         child: Text('Pinjam',
                             style: Theme.of(context).textTheme.headline6),

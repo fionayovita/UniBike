@@ -9,6 +9,7 @@ import 'package:unibike/ui/profile_page.dart';
 import 'package:unibike/ui/register_page.dart';
 import 'package:unibike/ui/splash_screen.dart';
 import 'package:unibike/ui/status_pinjam_page.dart';
+import 'package:unibike/widgets/card_sepeda.dart';
 
 import 'model/bike_model.dart';
 
@@ -33,8 +34,7 @@ class MyApp extends StatelessWidget {
         ProfilePage.routeName: (context) => ProfilePage(),
         MainPage.routeName: (context) => MainPage(),
         BikeDetailPage.routeName: (context) => BikeDetailPage(
-              bike: ModalRoute.of(context)?.settings.arguments as Bike,
-            ),
+            bike: ModalRoute.of(context)?.settings.arguments as Bike)
       },
     );
   }

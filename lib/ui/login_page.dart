@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
+import 'package:unibike/model/bike_model.dart';
 import 'package:unibike/ui/home_page.dart';
-import 'package:unibike/ui/main_page.dart';
 import 'package:unibike/ui/register_page.dart';
 
 class LoginPage extends StatefulWidget {
