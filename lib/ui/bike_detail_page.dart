@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/model/bike_model.dart';
 import 'package:unibike/ui/status_pinjam_page.dart';
@@ -99,6 +100,11 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
                           bool _isLoading = false;
                           try {
                             final jenisSepeda = widget.bike.frameModel;
+                            var today = DateTime.now();
+                            String dateFormatPinjam = DateFormat('EEE d MMM, hh:mm a').format(today);
+                            var kembali = today.add(Duration(hours: 2));
+                            String dateFormatKembali = DateFormat('EEE d MMM, hh:mm a').format(kembali);
+
                             DropDownMenu(onChanged: (value) {
                               widget.fakultas = value;
                             });
@@ -111,6 +117,8 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
                               'id_sepeda': id,
                               'jenis_sepeda': jenisSepeda,
                               'email_peminjam': emailUser,
+                              'waktu_pinjam': dateFormatPinjam,
+                              'waktu_kembali': dateFormatKembali,
                               'fakultas': widget.fakultas
                             });
 

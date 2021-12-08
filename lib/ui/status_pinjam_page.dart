@@ -4,11 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/model/bike_model.dart';
+import 'package:unibike/ui/home_page.dart';
+import 'package:unibike/ui/main_page.dart';
 import 'package:unibike/widgets/dropdown_menu.dart';
 
 class StatusPinjamPage extends StatelessWidget {
   static const routeName = 'status_pinjam_page';
   final firebase = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
   CollectionReference status =
       FirebaseFirestore.instance.collection('data_peminjaman');
 
@@ -16,8 +19,8 @@ class StatusPinjamPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Center(
+        child: Center(
+          child: SingleChildScrollView(
             child: Container(
               width: 350,
               margin: const EdgeInsets.only(top: 30),
@@ -94,7 +97,7 @@ class StatusPinjamPage extends StatelessWidget {
                                   TextStyle(fontSize: 15.0, color: greyOutline),
                             ),
                             Text(
-                              '01/12/2021 - 09.00 WIB',
+                              data['waktu_pinjam'],
                               style: Theme.of(context).textTheme.headline6,
                             ),
                             SizedBox(height: 22),
@@ -104,7 +107,7 @@ class StatusPinjamPage extends StatelessWidget {
                                   TextStyle(fontSize: 15.0, color: greyOutline),
                             ),
                             Text(
-                              '01/12/2021 - 11.00 WIB',
+                              data['waktu_kembali'],
                               style: Theme.of(context).textTheme.headline6,
                             ),
                             SizedBox(height: 22),
@@ -134,7 +137,18 @@ class StatusPinjamPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      firestore
+                        .collection('data_peminjaman')
+                        .doc('1')
+                        .delete()
+                        .then((value) =>
+                           print("Sepeda sudah dikembalikan"))
+                        .catchError((error) =>
+                           print("Failed to return bike: $error"));
+                        Navigator.popUntil(context, ModalRoute.withName(HomePage.routeName));
+                    },
+
                   ),
                 ],
               ),
