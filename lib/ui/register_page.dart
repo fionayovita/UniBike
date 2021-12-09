@@ -29,144 +29,143 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: darkPrimaryColor,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 50.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _isLoading
-                    ? Center(child: CircularProgressIndicator())
-                    : Container(),
-                Hero(
-                  tag: 'UniBike',
-                  child: Text(
-                    'UniBike',
-                    style: Theme.of(context).textTheme.headline1,
-                  ),
+      backgroundColor: darkPrimaryColor,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 50.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : Container(),
+              Hero(
+                tag: 'UniBike',
+                child: Text(
+                  'UniBike',
+                  style: Theme.of(context).textTheme.headline1,
                 ),
-                SizedBox(height: 24.0),
-                Text(
-                  'Create your account',
-                  style: Theme.of(context).textTheme.subtitle2,
+              ),
+              SizedBox(height: 24.0),
+              Text(
+                'Create your account',
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+              SizedBox(height: 8.0),
+              TextField(
+                style: TextStyle(color: primaryColor),
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  hintText: 'Email',
+                  hintStyle: Theme.of(context).textTheme.subtitle2,
                 ),
-                SizedBox(height: 8.0),
-                TextField(
-                  style: TextStyle(color: primaryColor),
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                    hintStyle: Theme.of(context).textTheme.subtitle2,
-                  ),
+              ),
+              SizedBox(height: 8.0),
+              TextField(
+                style: TextStyle(color: primaryColor),
+                cursorColor: primaryColor,
+                controller: _passwordController,
+                obscureText: _obscureText,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  hintStyle: Theme.of(context).textTheme.subtitle2,
                 ),
-                SizedBox(height: 8.0),
-                TextField(
-                  style: TextStyle(color: primaryColor),
-                  cursorColor: primaryColor,
-                  controller: _passwordController,
-                  obscureText: _obscureText,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    hintStyle: Theme.of(context).textTheme.subtitle2,
-                  ),
+              ),
+              SizedBox(height: 8.0),
+              TextField(
+                style: TextStyle(color: primaryColor),
+                controller: _namaController,
+                decoration: InputDecoration(
+                  hintText: 'Nama',
+                  hintStyle: Theme.of(context).textTheme.subtitle2,
                 ),
-                SizedBox(height: 8.0),
-                TextField(
-                  style: TextStyle(color: primaryColor),
-                  controller: _namaController,
-                  decoration: InputDecoration(
-                    hintText: 'Nama',
-                    hintStyle: Theme.of(context).textTheme.subtitle2,
-                  ),
+              ),
+              SizedBox(height: 8.0),
+              TextField(
+                style: TextStyle(color: primaryColor),
+                controller: _npmController,
+                decoration: InputDecoration(
+                  hintText: 'NPM',
+                  hintStyle: Theme.of(context).textTheme.subtitle2,
                 ),
-                SizedBox(height: 8.0),
-                TextField(
-                  style: TextStyle(color: primaryColor),
-                  controller: _npmController,
-                  decoration: InputDecoration(
-                    hintText: 'NPM',
-                    hintStyle: Theme.of(context).textTheme.subtitle2,
-                  ),
+              ),
+              SizedBox(height: 8.0),
+              TextField(
+                style: TextStyle(color: primaryColor),
+                controller: _prodiController,
+                decoration: InputDecoration(
+                  hintText: 'Program Studi',
+                  hintStyle: Theme.of(context).textTheme.subtitle2,
                 ),
-                SizedBox(height: 8.0),
-                TextField(
-                  style: TextStyle(color: primaryColor),
-                  controller: _prodiController,
-                  decoration: InputDecoration(
-                    hintText: 'Program Studi',
-                    hintStyle: Theme.of(context).textTheme.subtitle2,
-                  ),
+              ),
+              SizedBox(height: 8.0),
+              TextField(
+                style: TextStyle(color: primaryColor),
+                controller: _fakultasController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  hintText: 'Fakultas',
+                  hintStyle: Theme.of(context).textTheme.subtitle2,
                 ),
-                SizedBox(height: 8.0),
-                TextField(
-                  style: TextStyle(color: primaryColor),
-                  controller: _fakultasController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    hintText: 'Fakultas',
-                    hintStyle: Theme.of(context).textTheme.subtitle2,
-                  ),
+              ),
+              SizedBox(height: 24.0),
+              MaterialButton(
+                child: Text('Register'),
+                color: Theme.of(context).primaryColor,
+                textTheme: ButtonTextTheme.primary,
+                height: 50,
+                minWidth: MediaQuery.of(context).size.width,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
                 ),
-                SizedBox(height: 24.0),
-                MaterialButton(
-                  child: Text('Register'),
-                  color: Theme.of(context).primaryColor,
-                  textTheme: ButtonTextTheme.primary,
-                  height: 50,
-                  minWidth: MediaQuery.of(context).size.width,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  onPressed: () async {
-                    setState(() {
-                      _isLoading = true;
+                onPressed: () async {
+                  setState(() {
+                    _isLoading = true;
+                  });
+                  try {
+                    final email = _emailController.text;
+                    final password = _passwordController.text;
+                    final nama = _namaController.text;
+                    final npm = _npmController.text;
+                    final prodi = _prodiController.text;
+                    final fakultas = _fakultasController.text;
+
+                    await _auth.createUserWithEmailAndPassword(
+                        email: email, password: password);
+
+                    _store.collection('users').doc(_auth.currentUser?.uid).set({
+                      'email': email,
+                      'password': password,
+                      'nama': nama,
+                      'npm': npm,
+                      'prodi': prodi,
+                      'fakultas': fakultas
                     });
-                    try {
-                      final email = _emailController.text;
-                      final password = _passwordController.text;
-                      final nama = _namaController.text;
-                      final npm = _npmController.text;
-                      final prodi = _prodiController.text;
-                      final fakultas = _fakultasController.text;
-
-                      await _auth.createUserWithEmailAndPassword(
-                          email: email, password: password);
-
-                      _store
-                          .collection('users')
-                          .doc(_auth.currentUser?.uid)
-                          .set({
-                        'email': email,
-                        'password': password,
-                        'nama': nama,
-                        'npm': npm,
-                        'prodi': prodi,
-                        'fakultas': fakultas
-                      });
-                      Navigator.pop(context);
-                    } catch (e) {
-                      final snackbar = SnackBar(content: Text(e.toString()));
-                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                    } finally {
-                      setState(() {
+                    Navigator.pop(context);
+                  } catch (e) {
+                    final snackbar = SnackBar(content: Text(e.toString()));
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  } finally {
+                    setState(
+                      () {
                         _isLoading = false;
-                      });
-                    }
-                  },
-                ),
-                TextButton(
-                  child: Text('Already have an account? Login',
-                      style: TextStyle(color: secondaryColor)),
-                  onPressed: () => Navigator.pop(context),
-                ),
-              ],
-            ),
+                      },
+                    );
+                  }
+                },
+              ),
+              TextButton(
+                child: Text('Already have an account? Login',
+                    style: TextStyle(color: secondaryColor)),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   @override

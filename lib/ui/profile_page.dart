@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/ui/login_page.dart';
 
@@ -21,7 +20,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    String defaultUser = 'User';
     String currentUser = firebase.currentUser!.uid.toString();
 
     return Scaffold(
@@ -56,17 +54,23 @@ class _ProfilePageState extends State<ProfilePage> {
                         width: 200.0,
                         height: 200.0,
                         decoration: BoxDecoration(
-                            boxShadow: [BoxShadow(color: secondaryColor)],
-                            borderRadius: BorderRadius.circular(100.0),
-                            gradient: LinearGradient(
-                                colors: [secondaryColor, whiteBackground])),
+                          boxShadow: [
+                            BoxShadow(color: secondaryColor),
+                          ],
+                          borderRadius: BorderRadius.circular(100.0),
+                          gradient: LinearGradient(
+                            colors: [secondaryColor, whiteBackground],
+                          ),
+                        ),
                         child: CircleAvatar(
                           backgroundColor: Colors.transparent,
-                          child: Text('P',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 40.0,
-                                  fontWeight: FontWeight.bold)),
+                          child: Text(
+                            'P',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40.0,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                       SizedBox(height: 25.0),
@@ -140,6 +144,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ],
                         ),
                       ),
+                      SizedBox(height: 20),
                       MaterialButton(
                         child: Text('Log Out',
                             style: Theme.of(context).textTheme.headline6),
@@ -159,7 +164,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   );
                 }
-
                 return CircularProgressIndicator();
               },
             ),

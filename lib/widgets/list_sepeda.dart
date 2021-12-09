@@ -4,10 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:unibike/api/api_service.dart';
 import 'package:unibike/provider/bike_provider.dart';
 import 'package:unibike/widgets/card_sepeda.dart';
-import 'package:unibike/widgets/dropdown_menu.dart';
 
 class ListSepeda extends StatelessWidget {
-  int length;
+  final int length;
   ListSepeda({required this.length});
 
   @override

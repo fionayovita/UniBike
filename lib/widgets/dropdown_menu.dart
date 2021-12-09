@@ -74,28 +74,32 @@ class DropDownMenuState extends State<DropDownMenu> {
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           decoration: BoxDecoration(
-              color: secondaryColor,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.7),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                )
-              ]),
+            color: secondaryColor,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.7),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 3),
+              )
+            ],
+          ),
           child: DropdownButton(
             iconEnabledColor: primaryColor,
             dropdownColor: secondaryColor,
             hint: Text("Pilih Fakultas",
-                style: Theme.of(context).textTheme.subtitle1),
+                style: Theme.of(context).textTheme.subtitle2),
             value: fakultas,
-            items: _listFakultas.map((value) {
-              return DropdownMenuItem<String>(
-                child: Text(value),
-                value: value,
-              );
-            }).toList(),
+            items: _listFakultas.map(
+              (value) {
+                return DropdownMenuItem<String>(
+                  child:
+                      Text(value, style: Theme.of(context).textTheme.subtitle2),
+                  value: value,
+                );
+              },
+            ).toList(),
             onChanged: (value) {
               setState(
                 () {

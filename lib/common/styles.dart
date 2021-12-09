@@ -6,7 +6,6 @@ Color primaryColor = Color(0xFFF6F8FA);
 Color darkPrimaryColor = Color(0xFF191720);
 Color secondaryColor = Color(0xFF4d6dd9);
 Color whiteBackground = Color(0xFFF2F4F6);
-// CCCECF
 Color greyButton = Color(0xFF1E1C24);
 Color greyOutline = Color(0xFF3B3A42);
 
@@ -22,11 +21,17 @@ final TextTheme myTextTheme = TextTheme(
       letterSpacing: 0.25,
       color: darkPrimaryColor),
   headline3: GoogleFonts.poppins(
-      fontSize: 23, fontWeight: FontWeight.bold, color: primaryColor),
+      fontSize: 23, 
+      fontWeight: FontWeight.bold, 
+      color: primaryColor),
   headline4: GoogleFonts.poppins(
-      fontSize: 21, fontWeight: FontWeight.bold, color: primaryColor),
+      fontSize: 21, 
+      fontWeight: FontWeight.bold, 
+      color: primaryColor),
   headline5: GoogleFonts.poppins(
-      fontSize: 18, fontWeight: FontWeight.bold, color: darkPrimaryColor),
+      fontSize: 18, 
+      fontWeight: FontWeight.bold, 
+      color: darkPrimaryColor),
   headline6: GoogleFonts.rubik(
       fontSize: 18,
       fontWeight: FontWeight.w500,
@@ -38,7 +43,7 @@ final TextTheme myTextTheme = TextTheme(
       letterSpacing: 0.15,
       color: darkPrimaryColor),
   subtitle2: GoogleFonts.poppins(
-      fontSize: 13,
+      fontSize: 14,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.1,
       color: primaryColor),

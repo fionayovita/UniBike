@@ -2,7 +2,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
-import 'package:unibike/model/bike_model.dart';
 import 'package:unibike/ui/main_page.dart';
 import 'package:unibike/ui/profile_page.dart';
 import 'package:unibike/ui/status_pinjam_page.dart';
@@ -16,20 +15,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _bottomNavIndex = 0;
-  late PageController _pageController;
 
   List<Widget> _listPages() => [
         MainPage(),
         StatusPinjamPage(),
         ProfilePage(),
       ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _bottomNavIndex = index;
-      _pageController.jumpToPage(index);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +49,11 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         onTap: (selected) {
-          setState(() {
-            _bottomNavIndex = selected;
-          });
+          setState(
+            () {
+              _bottomNavIndex = selected;
+            },
+          );
         },
       ),
     );

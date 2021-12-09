@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unibike/common/styles.dart';
-import 'package:unibike/model/bike_model.dart';
 import 'package:unibike/ui/home_page.dart';
 import 'package:unibike/ui/register_page.dart';
 
@@ -130,9 +128,11 @@ class _LoginPageState extends State<LoginPage> {
                               color: primaryColor,
                             ),
                             onPressed: () {
-                              setState(() {
-                                _obscureText = !_obscureText;
-                              });
+                              setState(
+                                () {
+                                  _obscureText = !_obscureText;
+                                },
+                              );
                             },
                           ),
                           hintText: 'Password',
@@ -152,14 +152,15 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           Text("Don't have an account?"),
                           TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                    context, RegisterPage.routeName);
-                              },
-                              child: Text(
-                                "Register",
-                                style: TextStyle(color: secondaryColor),
-                              ))
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, RegisterPage.routeName);
+                            },
+                            child: Text(
+                              "Register",
+                              style: TextStyle(color: secondaryColor),
+                            ),
+                          ),
                         ],
                       ),
                       MaterialButton(
@@ -191,9 +192,11 @@ class _LoginPageState extends State<LoginPage> {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackbar);
                           } finally {
-                            setState(() {
-                              _isLoading = false;
-                            });
+                            setState(
+                              () {
+                                _isLoading = false;
+                              },
+                            );
                           }
                         },
                       ),

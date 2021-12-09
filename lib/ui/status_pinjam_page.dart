@@ -3,16 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
-import 'package:unibike/model/bike_model.dart';
 import 'package:unibike/ui/home_page.dart';
-import 'package:unibike/ui/main_page.dart';
-import 'package:unibike/widgets/dropdown_menu.dart';
 
 class StatusPinjamPage extends StatelessWidget {
   static const routeName = 'status_pinjam_page';
   final firebase = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
-  CollectionReference status =
+  final CollectionReference status =
       FirebaseFirestore.instance.collection('data_peminjaman');
 
   @override
@@ -139,16 +136,15 @@ class StatusPinjamPage extends StatelessWidget {
                     ),
                     onPressed: () {
                       firestore
-                        .collection('data_peminjaman')
-                        .doc('1')
-                        .delete()
-                        .then((value) =>
-                           print("Sepeda sudah dikembalikan"))
-                        .catchError((error) =>
-                           print("Failed to return bike: $error"));
-                        Navigator.popUntil(context, ModalRoute.withName(HomePage.routeName));
+                          .collection('data_peminjaman')
+                          .doc('1')
+                          .delete()
+                          .then((value) => print("Sepeda sudah dikembalikan"))
+                          .catchError((error) =>
+                              print("Failed to return bike: $error"));
+                      Navigator.popUntil(
+                          context, ModalRoute.withName(HomePage.routeName));
                     },
-
                   ),
                 ],
               ),

@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/ui/bike_detail_page.dart';
 import 'package:unibike/ui/home_page.dart';
@@ -10,7 +9,6 @@ import 'package:unibike/ui/profile_page.dart';
 import 'package:unibike/ui/register_page.dart';
 import 'package:unibike/ui/splash_screen.dart';
 import 'package:unibike/ui/status_pinjam_page.dart';
-import 'package:unibike/widgets/card_sepeda.dart';
 
 import 'model/bike_model.dart';
 
@@ -38,7 +36,6 @@ class MyApp extends StatelessWidget {
         BikeDetailPage.routeName: (context) => BikeDetailPage(
             bike: ModalRoute.of(context)?.settings.arguments as Bike)
       },
-      // home: email == null ? RegisterPage() : HomePage(),
     );
   }
 }

@@ -51,10 +51,11 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
               child: CircleAvatar(
                 backgroundColor: secondaryColor,
                 child: IconButton(
-                    icon: Icon(Icons.arrow_back, color: primaryColor),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
+                  icon: Icon(Icons.arrow_back, color: primaryColor),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ),
             ),
             Container(
@@ -96,63 +97,69 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
                     width: width,
                     alignment: Alignment.center,
                     child: ElevatedButton(
-                        onPressed: () {
-                          bool _isLoading = false;
-                          try {
-                            final jenisSepeda = widget.bike.frameModel;
-                            var today = DateTime.now();
-                            String dateFormatPinjam = DateFormat('EEE d MMM, hh:mm a').format(today);
-                            var kembali = today.add(Duration(hours: 2));
-                            String dateFormatKembali = DateFormat('EEE d MMM, hh:mm a').format(kembali);
+                      onPressed: () {
+                        bool _isLoading = false;
+                        try {
+                          final jenisSepeda = widget.bike.frameModel;
+                          var today = DateTime.now();
+                          String dateFormatPinjam =
+                              DateFormat('EEE d MMM, hh:mm a').format(today);
+                          var kembali = today.add(Duration(hours: 2));
+                          String dateFormatKembali =
+                              DateFormat('EEE d MMM, hh:mm a').format(kembali);
 
-                            DropDownMenu(onChanged: (value) {
+                          DropDownMenu(
+                            onChanged: (value) {
                               widget.fakultas = value;
-                            });
-                            print('di detail: ${widget.fakultas}');
+                            },
+                          );
+                          print('di detail: ${widget.fakultas}');
 
-                            widget._store
-                                .collection('data_peminjaman')
-                                .doc('1')
-                                .set({
+                          widget._store
+                              .collection('data_peminjaman')
+                              .doc('1')
+                              .set(
+                            {
                               'id_sepeda': id,
                               'jenis_sepeda': jenisSepeda,
                               'email_peminjam': emailUser,
                               'waktu_pinjam': dateFormatPinjam,
                               'waktu_kembali': dateFormatKembali,
                               'fakultas': widget.fakultas
-                            });
+                            },
+                          );
 
-                            Navigator.pushNamed(
-                                context, StatusPinjamPage.routeName,
-                                arguments: widget.bike);
+                          Navigator.pushNamed(
+                              context, StatusPinjamPage.routeName,
+                              arguments: widget.bike);
 
-                            final snackBar = SnackBar(
-                              content: Text(
-                                'Sukses Pinjam Sepeda dengan id: $id',
-                                style: Theme.of(context).textTheme.subtitle2,
-                              ),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          } catch (e) {
-                            final snackbar =
-                                SnackBar(content: Text(e.toString()));
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackbar);
-                          } finally {
-                            setState(() {
+                          final snackBar = SnackBar(
+                            content: Text(
+                              'Sukses Pinjam Sepeda dengan id: $id',
+                              style: Theme.of(context).textTheme.subtitle2,
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        } catch (e) {
+                          final snackbar =
+                              SnackBar(content: Text(e.toString()));
+                          ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                        } finally {
+                          setState(
+                            () {
                               widget.fakultas;
                               print('di finally: ${widget.fakultas}');
                               _isLoading = false;
-                            });
-                          }
-                        },
-                        child: Text('Pinjam',
-                            style: Theme.of(context).textTheme.headline6),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: Size(width, 50),
-                        )),
-                  )
+                            },
+                          );
+                        }
+                      },
+                      child: Text('Pinjam',
+                          style: Theme.of(context).textTheme.headline6),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(width, 50)),
+                    ),
+                  ),
                 ],
               ),
             ),
