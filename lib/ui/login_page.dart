@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/model/bike_model.dart';
 import 'package:unibike/ui/home_page.dart';
@@ -95,7 +96,6 @@ class _LoginPageState extends State<LoginPage> {
                         cursorColor: primaryColor,
                         controller: _passwordController,
                         obscureText: _obscureText,
-                        autofocus: true,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide:
@@ -175,7 +175,6 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () async {
                           setState(() {
                             _isLoading = true;
-                            Navigator.pushNamed(context, HomePage.routeName);
                           });
                           try {
                             final email = _emailController.text;
@@ -183,9 +182,12 @@ class _LoginPageState extends State<LoginPage> {
 
                             await _auth.signInWithEmailAndPassword(
                                 email: email, password: password);
+
+                            Navigator.pushNamed(context, HomePage.routeName);
                           } catch (e) {
-                            final snackbar =
-                                SnackBar(content: Text(e.toString()));
+                            final snackbar = SnackBar(
+                              content: Text(e.toString()),
+                            );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackbar);
                           } finally {

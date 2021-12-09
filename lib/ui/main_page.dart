@@ -25,7 +25,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    String currentUser = widget.firebase.currentUser!.uid.toString();
+    // String currentUser = widget.firebase.currentUser!.uid.toString();
 
     return Scaffold(
       backgroundColor: whiteBackground,
@@ -37,30 +37,34 @@ class _MainPageState extends State<MainPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FutureBuilder<DocumentSnapshot>(
-                  future: widget.users.doc('$currentUser').get(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<DocumentSnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      Text("Something went wrong");
-                    }
-
-                    if (snapshot.hasData && !snapshot.data!.exists) {
-                      Text("Document does not exist");
-                    }
-
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      Map<String, dynamic> data =
-                          snapshot.data!.data() as Map<String, dynamic>;
-                      var nama = data['nama'];
-                      return Text(
-                        "Hi, $nama!",
-                        style: Theme.of(context).textTheme.headline5,
-                      );
-                    }
-                    return Text('Loading');
-                  },
+                Text(
+                  "Hi, bikers!",
+                  style: Theme.of(context).textTheme.headline5,
                 ),
+                // FutureBuilder<DocumentSnapshot>(
+                //   future: widget.users.doc('$currentUser').get(),
+                //   builder: (BuildContext context,
+                //       AsyncSnapshot<DocumentSnapshot> snapshot) {
+                //     if (snapshot.hasError) {
+                //       Text("Something went wrong");
+                //     }
+
+                //     if (snapshot.hasData && !snapshot.data!.exists) {
+                //       Text("Document does not exist");
+                //     }
+
+                //     if (snapshot.connectionState == ConnectionState.done) {
+                //       Map<String, dynamic> data =
+                //           snapshot.data!.data() as Map<String, dynamic>;
+                //       var nama = data['nama'];
+                //       return Text(
+                //         "Hi, $nama!",
+                //         style: Theme.of(context).textTheme.headline5,
+                //       );
+                //     }
+                //     return Text('Loading');
+                //   },
+                // ),
                 SizedBox(height: 15.0),
                 Text(
                   "Find a Bike to go\naround the Campus",

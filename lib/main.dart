@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/ui/bike_detail_page.dart';
 import 'package:unibike/ui/home_page.dart';
@@ -16,6 +17,7 @@ import 'model/bike_model.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(MyApp());
 }
 
@@ -36,6 +38,7 @@ class MyApp extends StatelessWidget {
         BikeDetailPage.routeName: (context) => BikeDetailPage(
             bike: ModalRoute.of(context)?.settings.arguments as Bike)
       },
+      // home: email == null ? RegisterPage() : HomePage(),
     );
   }
 }

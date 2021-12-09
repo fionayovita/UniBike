@@ -69,7 +69,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   cursorColor: primaryColor,
                   controller: _passwordController,
                   obscureText: _obscureText,
-                  autofocus: true,
                   decoration: InputDecoration(
                     hintText: 'Password',
                     hintStyle: Theme.of(context).textTheme.subtitle2,
