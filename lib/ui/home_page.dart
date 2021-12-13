@@ -15,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _bottomNavIndex = 0;
+  late PageController _pageController;
 
   List<Widget> _listPages() => [
         MainPage(),
@@ -49,11 +50,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         onTap: (selected) {
-          setState(
-            () {
-              _bottomNavIndex = selected;
-            },
-          );
+          setState(() {
+            _bottomNavIndex = selected;
+          });
         },
       ),
     );

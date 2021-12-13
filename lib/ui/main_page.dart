@@ -19,8 +19,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    // String currentUser = widget.firebase.currentUser!.uid.toString();
-
     return Scaffold(
       backgroundColor: whiteBackground,
       body: SafeArea(

@@ -17,7 +17,7 @@ class DropDownMenu extends StatefulWidget {
 
 class DropDownMenuState extends State<DropDownMenu> {
   String? fakultas;
-  int lengthBike = 20;
+  int lengthBike = 0;
 
   List _listFakultas = [
     "Teknik",
@@ -116,7 +116,10 @@ class DropDownMenuState extends State<DropDownMenu> {
           ),
         ),
         SizedBox(height: 15.0),
-        Text('Bikes available in fakultas $fakultas: $lengthBike',
+        Text(
+            fakultas == null
+                ? 'Pilih fakultas untuk melihat jumlah sepeda'
+                : 'Sepeda yang tersedia di fakultas $fakultas: $lengthBike',
             style: Theme.of(context).textTheme.subtitle1),
         SizedBox(height: 15.0),
         ListSepeda(length: lengthBike)
