@@ -25,7 +25,7 @@ class _MainPageState extends State<MainPage> {
         child: SingleChildScrollView(
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 18.0, vertical: 30.0),
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 30.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

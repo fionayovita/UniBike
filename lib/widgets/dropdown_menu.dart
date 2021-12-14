@@ -71,21 +71,23 @@ class DropDownMenuState extends State<DropDownMenu> {
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          //alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(horizontal: 17, vertical: 5),
           decoration: BoxDecoration(
             color: secondaryColor,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.7),
                 spreadRadius: 2,
-                blurRadius: 5,
+                blurRadius: 3,
                 offset: Offset(0, 3),
               )
             ],
           ),
-          child: DropdownButton(
+          child: DropdownButtonHideUnderline(
+            child: ButtonTheme(
+            child: DropdownButton(
             iconEnabledColor: primaryColor,
             dropdownColor: secondaryColor,
             hint: Text("Pilih Fakultas",
@@ -114,13 +116,16 @@ class DropDownMenuState extends State<DropDownMenu> {
               );
             },
           ),
+          ),
+          ),
+          
         ),
-        SizedBox(height: 15.0),
+        SizedBox(height: 18.0),
         Text(
             fakultas == null
                 ? 'Pilih fakultas untuk melihat jumlah sepeda'
                 : 'Sepeda yang tersedia di fakultas $fakultas: $lengthBike',
-            style: Theme.of(context).textTheme.subtitle1),
+            style: Theme.of(context).textTheme.subtitle1, textAlign: TextAlign.center,), 
         SizedBox(height: 15.0),
         ListSepeda(length: lengthBike)
       ],

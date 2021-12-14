@@ -62,25 +62,25 @@ class _LoginPageState extends State<LoginPage> {
                           enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(width: 2.0, color: greyOutline),
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(15),
                           ),
                           disabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(width: 2.0, color: Colors.red),
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(15),
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
+                            borderRadius: BorderRadius.circular(15.0),
                             borderSide:
                                 BorderSide(color: greyOutline, width: 2.0),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
+                            borderRadius: BorderRadius.circular(15.0),
                             borderSide:
                                 BorderSide(color: primaryColor, width: 2.0),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
+                            borderRadius: BorderRadius.circular(15.0),
                             borderSide:
                                 BorderSide(color: Colors.red, width: 2.0),
                           ),
@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                           hintStyle: Theme.of(context).textTheme.subtitle2,
                         ),
                       ),
-                      SizedBox(height: 8.0),
+                      SizedBox(height: 10.0),
                       TextField(
                         style: Theme.of(context).textTheme.subtitle2,
                         cursorColor: primaryColor,
@@ -98,25 +98,25 @@ class _LoginPageState extends State<LoginPage> {
                           enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(width: 2.0, color: greyOutline),
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(15),
                           ),
                           disabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(width: 2.0, color: greyOutline),
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(15),
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
+                            borderRadius: BorderRadius.circular(15.0),
                             borderSide:
                                 BorderSide(color: greyOutline, width: 2.0),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
+                            borderRadius: BorderRadius.circular(15.0),
                             borderSide:
                                 BorderSide(color: primaryColor, width: 2.0),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
+                            borderRadius: BorderRadius.circular(15.0),
                             borderSide:
                                 BorderSide(color: Colors.red, width: 2.0),
                           ),
@@ -165,10 +165,10 @@ class _LoginPageState extends State<LoginPage> {
                             style: Theme.of(context).textTheme.subtitle1),
                         color: Theme.of(context).primaryColor,
                         textTheme: ButtonTextTheme.primary,
-                        height: 50,
+                        height: 53,
                         minWidth: MediaQuery.of(context).size.width,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         onPressed: () async {
                           setState(() {
