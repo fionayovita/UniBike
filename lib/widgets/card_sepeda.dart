@@ -19,8 +19,8 @@ class CardSepeda extends StatelessWidget {
         elevation: 2,
         shadowColor: greyButton,
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        margin: const EdgeInsets.symmetric(vertical: 13, horizontal: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[

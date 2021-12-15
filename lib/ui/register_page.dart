@@ -115,10 +115,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Text('Register'),
                 color: Theme.of(context).primaryColor,
                 textTheme: ButtonTextTheme.primary,
-                height: 50,
+                height: 53,
                 minWidth: MediaQuery.of(context).size.width,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 onPressed: () async {
                   setState(() {

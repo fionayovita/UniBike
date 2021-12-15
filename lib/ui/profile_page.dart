@@ -90,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             horizontal: 20, vertical: 20),
                         decoration: BoxDecoration(
                             color: whiteBackground,
-                            borderRadius: BorderRadius.circular(25.0)),
+                            borderRadius: BorderRadius.circular(15.0)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -150,10 +150,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: Theme.of(context).textTheme.headline6),
                         color: secondaryColor,
                         // textTheme: ButtonTextTheme.primary,
-                        height: 50,
+                        height: 53,
                         minWidth: MediaQuery.of(context).size.width,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         onPressed: () async {
                           await firebase.signOut();

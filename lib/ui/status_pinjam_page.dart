@@ -27,7 +27,7 @@ class StatusPinjamPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               decoration: BoxDecoration(
                 color: secondaryColor,
-                borderRadius: BorderRadius.circular(25.0),
+                borderRadius: BorderRadius.circular(15.0),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,10 +136,10 @@ class StatusPinjamPage extends StatelessWidget {
                             child: Text('Sudah Dikembalikan',
                                 style: Theme.of(context).textTheme.headline5),
                             color: primaryColor,
-                            height: 50,
+                            height: 53,
                             minWidth: MediaQuery.of(context).size.width,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             onPressed: () {
                               firestore
