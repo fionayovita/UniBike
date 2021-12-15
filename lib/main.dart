@@ -29,13 +29,13 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  final NotificationHelper _notificationHelper = NotificationHelper();
+  /*final NotificationHelper _notificationHelper = NotificationHelper();
   final BackgroundService _service = BackgroundService();
   _service.initializeIsolate();
   if (Platform.isAndroid) {
     await AndroidAlarmManager.initialize();
   }
-  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);*/
 
   runApp(MyApp());
 }

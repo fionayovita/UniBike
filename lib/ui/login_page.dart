@@ -26,10 +26,31 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: darkPrimaryColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
+          child: LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        if (constraints.maxWidth > 700) {
+          return Padding(
             padding: const EdgeInsets.only(
                 top: 20.0, left: 25.0, right: 25.0, bottom: 20.0),
-            child: Column(
+            child: _textField(context)
+          );
+        } else {
+          return Center(
+            /*padding: const EdgeInsets.only(
+                top: 20.0, left: 200.0, right: 200.0, bottom: 20.0),*/
+            child: _textField(context)
+            );
+          }
+      },
+    ),
+        ),
+      ),
+    );
+  }
+
+
+  Widget _textField(BuildContext context) {
+    return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
@@ -199,10 +220,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 )
               ],
-            ),
-          ),
-        ),
-      ),
-    );
+            );
   }
 }
+
+
