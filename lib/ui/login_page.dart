@@ -28,23 +28,30 @@ class _LoginPageState extends State<LoginPage> {
         child: SingleChildScrollView(
           child: LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth > 700) {
+        if (constraints.maxWidth <= 700) {
           return Padding(
-            padding: const EdgeInsets.only(
-                top: 20.0, left: 25.0, right: 25.0, bottom: 20.0),
+            padding: const EdgeInsets.symmetric(
+                horizontal: 25.0, vertical: 20.0),
             child: _textField(context)
           );
-        } else {
-          return Center(
-            /*padding: const EdgeInsets.only(
-                top: 20.0, left: 200.0, right: 200.0, bottom: 20.0),*/
+        } else if (constraints.maxWidth <= 1400) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 200.0, vertical: 20.0),
             child: _textField(context)
-            );
-          }
+          );
+        }
+        else {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 550.0, vertical: 20.0),
+            child: _textField(context)
+          );
+        } 
       },
     ),
-        ),
-      ),
+  ),
+),
     );
   }
 

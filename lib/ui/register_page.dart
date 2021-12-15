@@ -31,9 +31,36 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: darkPrimaryColor,
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 50.0),
-          child: Column(
+        child: LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        if (constraints.maxWidth <= 700) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 25.0, vertical: 20.0),
+            child: _textField(context)
+            );
+        }else if (constraints.maxWidth <= 1500) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 200.0, vertical: 20.0),
+            child: _textField(context)
+            );
+        }
+        else {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 550.0, vertical: 20.0),
+            child: _textField(context)
+            );
+          } 
+        },
+      ),
+    ),
+  );
+}
+
+  Widget _textField(BuildContext context) {
+    return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -162,11 +189,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 onPressed: () => Navigator.pop(context),
               ),
             ],
-          ),
-        ),
-      ),
-    );
+          );
   }
+  
 
   @override
   void dispose() {
