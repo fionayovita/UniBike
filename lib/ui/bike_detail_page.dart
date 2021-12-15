@@ -9,6 +9,7 @@ import 'package:unibike/model/bike_model.dart';
 import 'package:unibike/provider/alarm_provider.dart';
 import 'package:unibike/provider/preferences_provider.dart';
 import 'package:unibike/ui/status_pinjam_page.dart';
+import 'package:unibike/widgets/custom_dialog.dart';
 import 'package:unibike/widgets/dropdown_menu.dart';
 
 class BikeDetailPage extends StatefulWidget {
@@ -140,10 +141,17 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
 
                                   scheduled.scheduledNews(true);
                                   provider.enableAlarm(true);
-
-                                  Navigator.pushNamed(
-                                      context, StatusPinjamPage.routeName,
-                                      arguments: widget.bike);
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return CustomDialog(
+                                        title: 'Sukses Pinjam Sepeda!',
+                                        descriptions:
+                                            'Silahkan cek status peminjaman di halaman Status Pinjam untuk melihat lebih detail',
+                                        text: 'OK',
+                                      );
+                                    },
+                                  );
 
                                   final snackBar = SnackBar(
                                     content: Text(
