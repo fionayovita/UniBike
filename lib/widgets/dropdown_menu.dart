@@ -111,7 +111,7 @@ class DropDownMenuState extends State<DropDownMenu> {
                   getDropDownItem();
                   print('widget ${widget.fakultasMain}');
                   lengthBike = lengthFakultas();
-                  ListSepeda(length: lengthBike);
+                  ListSepeda(length: lengthBike, gridCount: 4);
                 },
               );
             },
@@ -127,7 +127,16 @@ class DropDownMenuState extends State<DropDownMenu> {
                 : 'Sepeda yang tersedia di fakultas $fakultas: $lengthBike',
             style: Theme.of(context).textTheme.subtitle1, textAlign: TextAlign.center,), 
         SizedBox(height: 15.0),
-        ListSepeda(length: lengthBike)
+        LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+        if (constraints.maxWidth <= 700) {
+          return ListSepeda(length: lengthBike, gridCount: 2);
+        } else if (constraints.maxWidth <= 1500) {
+            return ListSepeda(length: lengthBike, gridCount: 4);
+        } else {
+          return ListSepeda(length: lengthBike, gridCount: 6);
+          } 
+        },
+      ),
       ],
     );
   }

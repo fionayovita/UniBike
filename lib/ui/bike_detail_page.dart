@@ -27,17 +27,51 @@ class BikeDetailPage extends StatefulWidget {
   State<BikeDetailPage> createState() => _BikeDetailPageState();
 }
 
+
+
 class _BikeDetailPageState extends State<BikeDetailPage> {
+  
   @override
   Widget build(BuildContext context) {
-    var id = widget.bike.id;
-    final width = MediaQuery.of(context).size.width;
-    String emailUser = widget.firebase.currentUser!.email.toString();
 
     return Scaffold(
       backgroundColor: whiteBackground,
       body: SingleChildScrollView(
-        child: Stack(
+        child: LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        if (constraints.maxWidth <= 700) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 25.0, vertical: 20.0),
+            child: _textField(context)
+          );
+        } else if (constraints.maxWidth <= 1100) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 100.0, vertical: 20.0),
+            child: _textField(context)
+          );
+        }
+        else {
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 400.0, vertical: 20.0),
+            child: _textField(context)
+          );
+        } 
+      },
+    ),
+      ),
+    );
+  }
+
+
+Widget _textField(BuildContext context) {
+  final width = MediaQuery.of(context).size.width;
+  var id = widget.bike.id;
+  String emailUser = widget.firebase.currentUser!.email.toString();
+
+    return Stack(
           children: [
             Container(
               width: width,
@@ -191,8 +225,6 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
+        );
+}
 }
