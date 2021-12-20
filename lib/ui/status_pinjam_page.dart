@@ -8,10 +8,19 @@ import 'package:unibike/provider/alarm_provider.dart';
 import 'package:unibike/provider/preferences_provider.dart';
 import 'package:unibike/ui/home_page.dart';
 
-class StatusPinjamPage extends StatelessWidget {
+class StatusPinjamPage extends StatefulWidget {
   static const routeName = 'status_pinjam_page';
+
+  @override
+  State<StatusPinjamPage> createState() => _StatusPinjamPageState();
+}
+
+class _StatusPinjamPageState extends State<StatusPinjamPage> {
   final firebase = FirebaseAuth.instance;
+
   final firestore = FirebaseFirestore.instance;
+  bool statusPinjam = false;
+
   final CollectionReference status =
       FirebaseFirestore.instance.collection('data_peminjaman');
 
@@ -20,8 +29,69 @@ class StatusPinjamPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: SingleChildScrollView(
-            child: Container(
+          child: SingleChildScrollView(child: _contentPinjam(context)),
+        ),
+      ),
+    );
+  }
+
+  Widget _contentEmpty(BuildContext context) {
+    return Center(
+        child: Column(
+      children: <Widget>[
+        Image.asset(
+          'assets/logoBulet.png',
+          width: 300,
+          height: 300,
+        ),
+        Text('Anda belum meminjam sepeda',
+            style: Theme.of(context).textTheme.headline5)
+      ],
+    ));
+  }
+
+  Widget _contentPinjam(BuildContext context) {
+    statusPinjam = true;
+
+    return Center(
+      child: FutureBuilder<DocumentSnapshot>(
+        future: status.doc(firebase.currentUser?.uid).get(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+                child: Column(children: <Widget>[
+              Image.asset(
+                'assets/logoBulet.png',
+                width: 300,
+                height: 300,
+              ),
+              Text("Something went wrong",
+                  style: Theme.of(context).textTheme.headline5)
+            ]));
+          }
+
+          if (snapshot.hasData && !snapshot.data!.exists) {
+            return Center(
+              child: Column(
+                children: <Widget>[
+                  Image.asset(
+                    'assets/logoBulet.png',
+                    width: 300,
+                    height: 300,
+                  ),
+                  Text('Anda belum meminjam sepeda',
+                      style: Theme.of(context).textTheme.headline5)
+                ],
+              ),
+            );
+          }
+
+          if (snapshot.connectionState == ConnectionState.done) {
+            Map<String, dynamic> data =
+                snapshot.data!.data() as Map<String, dynamic>;
+            print(data['nama']);
+            return Container(
               width: 350,
               margin: const EdgeInsets.only(top: 30),
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -32,101 +102,72 @@ class StatusPinjamPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
-                    child: Text(
-                      'Status Peminjaman',
-                      style: TextStyle(
-                          fontSize: 28.0,
-                          color: primaryColor,
-                          fontWeight: FontWeight.bold),
-                    ),
+                  Text(
+                    'Status Peminjaman',
+                    style: TextStyle(
+                        fontSize: 28.0,
+                        color: primaryColor,
+                        fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 20),
-                  FutureBuilder<DocumentSnapshot>(
-                    future: status.doc(firebase.currentUser?.uid).get(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<DocumentSnapshot> snapshot) {
-                      if (snapshot.hasError) {
-                        return Text("Something went wrong");
-                      }
-
-                      if (snapshot.hasData && !snapshot.data!.exists) {
-                        return Text("Document does not exist");
-                      }
-
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        Map<String, dynamic> data =
-                            snapshot.data!.data() as Map<String, dynamic>;
-                        print(data['nama']);
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'ID Sepeda',
-                              style:
-                                  TextStyle(fontSize: 15.0, color: greyOutline),
-                            ),
-                            Text(
-                              '${data['id_sepeda']}',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            SizedBox(height: 22),
-                            Text(
-                              'Jenis Sepeda',
-                              style:
-                                  TextStyle(fontSize: 15.0, color: greyOutline),
-                            ),
-                            Text(
-                              '${data['jenis_sepeda']}',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            SizedBox(height: 22),
-                            Text(
-                              'Email Peminjam',
-                              style:
-                                  TextStyle(fontSize: 15.0, color: greyOutline),
-                            ),
-                            Text(
-                              data['email_peminjam'],
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            SizedBox(height: 22),
-                            Text(
-                              'Waktu Peminjaman',
-                              style:
-                                  TextStyle(fontSize: 15.0, color: greyOutline),
-                            ),
-                            Text(
-                              '${data['waktu_pinjam']}',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            SizedBox(height: 22),
-                            Text(
-                              'Waktu Pengembalian',
-                              style:
-                                  TextStyle(fontSize: 15.0, color: greyOutline),
-                            ),
-                            Text(
-                              '${data['waktu_kembali']}',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            SizedBox(height: 22),
-                            Text(
-                              'Fakultas Peminjaman',
-                              style:
-                                  TextStyle(fontSize: 15.0, color: greyOutline),
-                            ),
-                            Text(
-                              'Fakultas ${data['fakultas']}',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                          ],
-                        );
-                      }
-                      return Text("loading");
-                    },
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'ID Sepeda',
+                        style: TextStyle(fontSize: 15.0, color: greyOutline),
+                      ),
+                      Text(
+                        '${data['id_sepeda']}',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      SizedBox(height: 22),
+                      Text(
+                        'Jenis Sepeda',
+                        style: TextStyle(fontSize: 15.0, color: greyOutline),
+                      ),
+                      Text(
+                        '${data['jenis_sepeda']}',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      SizedBox(height: 22),
+                      Text(
+                        'Email Peminjam',
+                        style: TextStyle(fontSize: 15.0, color: greyOutline),
+                      ),
+                      Text(
+                        data['email_peminjam'],
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      SizedBox(height: 22),
+                      Text(
+                        'Waktu Peminjaman',
+                        style: TextStyle(fontSize: 15.0, color: greyOutline),
+                      ),
+                      Text(
+                        '${data['waktu_pinjam']}',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      SizedBox(height: 22),
+                      Text(
+                        'Waktu Pengembalian',
+                        style: TextStyle(fontSize: 15.0, color: greyOutline),
+                      ),
+                      Text(
+                        '${data['waktu_kembali']}',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      SizedBox(height: 22),
+                      Text(
+                        'Fakultas Peminjaman',
+                        style: TextStyle(fontSize: 15.0, color: greyOutline),
+                      ),
+                      Text(
+                        'Fakultas ${data['fakultas']}',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 22),
                   SizedBox(height: 50),
                   Consumer<PreferencesProvider>(
                     builder: (context, provider, child) {
@@ -142,6 +183,9 @@ class StatusPinjamPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             onPressed: () {
+                              setState(() {
+                                statusPinjam = false;
+                              });
                               firestore
                                   .collection('data_peminjaman')
                                   .doc(firebase.currentUser?.uid)
@@ -164,9 +208,10 @@ class StatusPinjamPage extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ),
-        ),
+            );
+          }
+          return Text("loading");
+        },
       ),
     );
   }
