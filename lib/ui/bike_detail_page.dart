@@ -42,7 +42,7 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
         if (constraints.maxWidth <= 700) {
           return Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: 25.0, vertical: 20.0),
+                horizontal: 0, vertical: 0),
             child: _textField(context)
           );
         } else if (constraints.maxWidth <= 1100) {
