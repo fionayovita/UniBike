@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/ui/login_page.dart';
 
@@ -17,6 +20,8 @@ class _ProfilePageState extends State<ProfilePage> {
   final firebase = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  var _image;
+  final ImagePicker _picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
+                        alignment: Alignment.center,
                         width: 200.0,
                         height: 200.0,
                         decoration: BoxDecoration(
@@ -62,15 +68,32 @@ class _ProfilePageState extends State<ProfilePage> {
                             colors: [secondaryColor, whiteBackground],
                           ),
                         ),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.transparent,
-                          child: Text(
-                            'P',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40.0,
-                                fontWeight: FontWeight.bold),
-                          ),
+                        child: Stack(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 85.0,
+                              backgroundImage: _image != null
+                                  ? FileImage(_image) as ImageProvider
+                                  : AssetImage('assets/logo.png'),
+                            ),
+                            Positioned(
+                              bottom: 20.0,
+                              right: 40.0,
+                              child: InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: ((builder) => popUpOption()),
+                                  );
+                                },
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  color: secondaryColor,
+                                  size: 28.0,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(height: 25.0),
@@ -149,7 +172,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Text('Log Out',
                             style: Theme.of(context).textTheme.headline6),
                         color: secondaryColor,
-                        // textTheme: ButtonTextTheme.primary,
                         height: 53,
                         minWidth: MediaQuery.of(context).size.width,
                         shape: RoundedRectangleBorder(
@@ -171,5 +193,49 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+
+  Widget popUpOption() {
+    return Container(
+      height: 100.0,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.all(20.0),
+      child: Column(
+        children: <Widget>[
+          Text('Pilih Foto Profile',
+              style: Theme.of(context).textTheme.headline5),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton.icon(
+                onPressed: () {
+                  takePhoto(ImageSource.camera);
+                },
+                icon: Icon(Icons.camera_alt),
+                label: Text('Camera'),
+              ),
+              SizedBox(width: 20),
+              ElevatedButton.icon(
+                onPressed: () {
+                  takePhoto(ImageSource.gallery);
+                },
+                icon: Icon(Icons.photo_size_select_actual_outlined),
+                label: Text('Gallery'),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  void takePhoto(ImageSource source) async {
+    var pickedFile = await _picker.pickImage(source: source);
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
   }
 }

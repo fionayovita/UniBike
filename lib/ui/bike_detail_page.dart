@@ -141,6 +141,7 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
 
                                   scheduled.scheduledNews(true);
                                   provider.enableAlarm(true);
+
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
@@ -167,6 +168,18 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
                                       SnackBar(content: Text(e.toString()));
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackbar);
+
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return CustomDialog(
+                                        title: 'Peminjaman Gagal',
+                                        descriptions:
+                                            'Error: ${e.toString()}. Silahkan coba lagi beberapa saat kemudian!',
+                                        text: 'OK',
+                                      );
+                                    },
+                                  );
                                 } finally {
                                   setState(
                                     () {
