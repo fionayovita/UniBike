@@ -34,7 +34,13 @@ class _SplashScreenState extends State<SplashScreen>
         body: Stack(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(color: darkPrimaryColor),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/splash.jpg'), fit: BoxFit.cover),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(color: Color(0xB3191720)),
             ),
             Center(
               child: Image.asset(

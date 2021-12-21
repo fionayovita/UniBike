@@ -16,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   final _auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _obscureText = true;
   bool _isLoading = false;
@@ -27,208 +28,176 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth <= 700) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 25.0, vertical: 20.0),
-            child: _textField(context)
-          );
-        } else if (constraints.maxWidth <= 1400) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 200.0, vertical: 20.0),
-            child: _textField(context)
-          );
-        }
-        else {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 550.0, vertical: 20.0),
-            child: _textField(context)
-          );
-        } 
-      },
-    ),
-  ),
-),
+            builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxWidth <= 700) {
+                return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25.0, vertical: 20.0),
+                    child: _textField(context));
+              } else if (constraints.maxWidth <= 1400) {
+                return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 200.0, vertical: 20.0),
+                    child: _textField(context));
+              } else {
+                return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 550.0, vertical: 20.0),
+                    child: _textField(context));
+              }
+            },
+          ),
+        ),
+      ),
     );
   }
 
-
   Widget _textField(BuildContext context) {
-    return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 50.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Unibike,',
-                                style: Theme.of(context).textTheme.headline1),
-                            Text('get started',
-                                style: Theme.of(context).textTheme.headline4),
-                          ],
-                        ),
-                      ),
-                      _isLoading
-                          ? Center(child: CircularProgressIndicator())
-                          : Container(),
-                      SizedBox(height: 24.0),
-                      TextField(
-                        style: Theme.of(context).textTheme.subtitle2,
-                        controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          fillColor: Colors.amber,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2.0, color: greyOutline),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          disabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2.0, color: Colors.red),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide:
-                                BorderSide(color: greyOutline, width: 2.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide:
-                                BorderSide(color: primaryColor, width: 2.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide:
-                                BorderSide(color: Colors.red, width: 2.0),
-                          ),
-                          hintText: 'Email',
-                          hintStyle: Theme.of(context).textTheme.subtitle2,
-                        ),
-                      ),
-                      SizedBox(height: 10.0),
-                      TextField(
-                        style: Theme.of(context).textTheme.subtitle2,
-                        cursorColor: primaryColor,
-                        controller: _passwordController,
-                        obscureText: _obscureText,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2.0, color: greyOutline),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          disabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2.0, color: greyOutline),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide:
-                                BorderSide(color: greyOutline, width: 2.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide:
-                                BorderSide(color: primaryColor, width: 2.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide:
-                                BorderSide(color: Colors.red, width: 2.0),
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _obscureText
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: primaryColor,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _obscureText = !_obscureText;
-                              });
-                            },
-                          ),
-                          hintText: 'Password',
-                          hintStyle: Theme.of(context).textTheme.subtitle2,
-                        ),
-                      ),
-                      SizedBox(height: 24.0),
-                    ],
+    return Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 50.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Unibike,',
+                            style: Theme.of(context).textTheme.headline1),
+                        Text('get started',
+                            style: Theme.of(context).textTheme.headline4),
+                      ],
+                    ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text("Don't have an account?"),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                    context, RegisterPage.routeName);
-                              },
-                              child: Text(
-                                "Register",
-                                style: TextStyle(color: secondaryColor),
-                              ))
-                        ],
+                  _isLoading
+                      ? Center(child: CircularProgressIndicator())
+                      : Container(),
+                  SizedBox(height: 24.0),
+                  TextFormField(
+                    style: Theme.of(context).textTheme.subtitle2,
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (text) {
+                      if (text != null && text.isNotEmpty) {
+                        return null;
+                      } else {
+                        return 'Email Can\'t Be Empty';
+                      }
+                    },
+                    decoration: InputDecoration(
+                      errorStyle: TextStyle(
+                        color: Colors.red,
+                        wordSpacing: 5.0,
                       ),
-                      MaterialButton(
-                        child: Text('Login',
-                            style: Theme.of(context).textTheme.subtitle1),
-                        color: Theme.of(context).primaryColor,
-                        textTheme: ButtonTextTheme.primary,
-                        height: 53,
-                        minWidth: MediaQuery.of(context).size.width,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                      hintText: 'Email',
+                      hintStyle: Theme.of(context).textTheme.subtitle2,
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextFormField(
+                    style: Theme.of(context).textTheme.subtitle2,
+                    cursorColor: primaryColor,
+                    controller: _passwordController,
+                    obscureText: _obscureText,
+                    validator: (text) {
+                      if (text != null && text.isNotEmpty) {
+                        return null;
+                      } else {
+                        return 'Password Can\'t Be Empty';
+                      }
+                    },
+                    decoration: InputDecoration(
+                      errorStyle: TextStyle(
+                        color: Colors.red,
+                        wordSpacing: 5.0,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: primaryColor,
                         ),
-                        onPressed: () async {
+                        onPressed: () {
                           setState(() {
-                            _isLoading = true;
+                            _obscureText = !_obscureText;
                           });
-                          try {
-                            final email = _emailController.text;
-                            final password = _passwordController.text;
-
-                            await _auth.signInWithEmailAndPassword(
-                                email: email, password: password);
-
-                            Navigator.pushNamed(context, HomePage.routeName);
-                          } catch (e) {
-                            final snackbar = SnackBar(
-                              content: Text(e.toString()),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackbar);
-                          } finally {
-                            setState(() {
-                              _isLoading = false;
-                            });
-                          }
                         },
                       ),
+                      hintText: 'Password',
+                      hintStyle: Theme.of(context).textTheme.subtitle2,
+                    ),
+                  ),
+                  SizedBox(height: 24.0),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Don't have an account?"),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, RegisterPage.routeName);
+                          },
+                          child: Text(
+                            "Register",
+                            style: TextStyle(color: secondaryColor),
+                          ))
                     ],
                   ),
-                )
-              ],
-            );
+                  MaterialButton(
+                    child: Text('Login',
+                        style: Theme.of(context).textTheme.subtitle1),
+                    color: Theme.of(context).primaryColor,
+                    textTheme: ButtonTextTheme.primary,
+                    height: 53,
+                    minWidth: MediaQuery.of(context).size.width,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    onPressed: () async {
+                      setState(() {
+                        _isLoading = true;
+                        if (!_formKey.currentState!.validate()) {
+                          return;
+                        }
+                      });
+                      try {
+                        final email = _emailController.text;
+                        final password = _passwordController.text;
+
+                        await _auth.signInWithEmailAndPassword(
+                            email: email, password: password);
+
+                        Navigator.pushNamed(context, HomePage.routeName);
+                      } catch (e) {
+                        final snackbar = SnackBar(
+                          content: Text(e.toString()),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                      } finally {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      }
+                    },
+                  ),
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }
-
-
