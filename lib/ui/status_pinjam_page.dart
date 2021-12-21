@@ -181,11 +181,10 @@ class _StatusPinjamPageState extends State<StatusPinjamPage> {
                                   .catchError((error) =>
                                       print("Failed to return bike: $error"));
 
-                              // scheduled.scheduledNews(false);
-                              // provider.enableAlarm(false);
+                              scheduled.scheduledNews(false);
+                              provider.enableAlarm(false);
 
-                              Navigator.popUntil(context,
-                                  ModalRoute.withName(HomePage.routeName));
+                              
                             },
                           );
                         },

@@ -23,6 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   FirebaseStorage storage = FirebaseStorage.instance;
 
+
   var _image;
   final ImagePicker _picker = ImagePicker();
 
@@ -61,8 +62,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         alignment: Alignment.center,
                         color: secondaryColor,
-                        width: 300,
-                        height: 300,
+                        width: 350,
+                        height: 350,
                         child: Stack(
                           children: <Widget>[
                             FutureBuilder<String>(
@@ -78,6 +79,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   return Image.network(
                                     image.data.toString(),
                                     fit: BoxFit.cover,
+                                    width: 350,
+                                    height: 350,
                                   );
                                 } else {
                                   return Text('No Picture',
@@ -89,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Positioned(
                               bottom: 20.0,
-                              right: 40.0,
+                              right: 20.0,
                               child: InkWell(
                                 onTap: () {
                                   showModalBottomSheet(

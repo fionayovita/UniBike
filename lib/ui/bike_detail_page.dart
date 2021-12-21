@@ -157,8 +157,8 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
                                 },
                               );
 
-                              // scheduled.scheduledNews(true);
-                              // provider.enableAlarm(true);
+                              scheduled.scheduledNews(true);
+                              provider.enableAlarm(true);
 
                               showDialog(
                                 context: context,
