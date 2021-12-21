@@ -22,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _npmController = TextEditingController();
   final _prodiController = TextEditingController();
   final _fakultasController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _obscureText = true;
   bool _isLoading = false;
@@ -32,166 +33,207 @@ class _RegisterPageState extends State<RegisterPage> {
       backgroundColor: darkPrimaryColor,
       body: SingleChildScrollView(
         child: LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth <= 700) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 25.0, vertical: 20.0),
-            child: _textField(context)
-            );
-        }else if (constraints.maxWidth <= 1500) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 200.0, vertical: 20.0),
-            child: _textField(context)
-            );
-        }
-        else {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 550.0, vertical: 20.0),
-            child: _textField(context)
-            );
-          } 
-        },
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxWidth <= 700) {
+              return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 20.0),
+                  child: _textField(context));
+            } else if (constraints.maxWidth <= 1500) {
+              return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 200.0, vertical: 20.0),
+                  child: _textField(context));
+            } else {
+              return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 550.0, vertical: 20.0),
+                  child: _textField(context));
+            }
+          },
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _textField(BuildContext context) {
-    return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _isLoading
-                  ? Center(child: CircularProgressIndicator())
-                  : Container(),
-              Hero(
-                tag: 'UniBike',
-                child: Text(
-                  'UniBike',
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ),
-              SizedBox(height: 24.0),
-              Text(
-                'Create your account',
-                style: Theme.of(context).textTheme.subtitle2,
-              ),
-              SizedBox(height: 8.0),
-              TextField(
-                style: TextStyle(color: primaryColor),
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  hintText: 'Email',
-                  hintStyle: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              SizedBox(height: 8.0),
-              TextField(
-                style: TextStyle(color: primaryColor),
-                cursorColor: primaryColor,
-                controller: _passwordController,
-                obscureText: _obscureText,
-                decoration: InputDecoration(
-                  hintText: 'Password',
-                  hintStyle: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              SizedBox(height: 8.0),
-              TextField(
-                style: TextStyle(color: primaryColor),
-                controller: _namaController,
-                decoration: InputDecoration(
-                  hintText: 'Nama',
-                  hintStyle: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              SizedBox(height: 8.0),
-              TextField(
-                style: TextStyle(color: primaryColor),
-                controller: _npmController,
-                decoration: InputDecoration(
-                  hintText: 'NPM',
-                  hintStyle: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              SizedBox(height: 8.0),
-              TextField(
-                style: TextStyle(color: primaryColor),
-                controller: _prodiController,
-                decoration: InputDecoration(
-                  hintText: 'Program Studi',
-                  hintStyle: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              SizedBox(height: 8.0),
-              TextField(
-                style: TextStyle(color: primaryColor),
-                controller: _fakultasController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  hintText: 'Fakultas',
-                  hintStyle: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              SizedBox(height: 24.0),
-              MaterialButton(
-                child: Text('Register'),
-                color: Theme.of(context).primaryColor,
-                textTheme: ButtonTextTheme.primary,
-                height: 53,
-                minWidth: MediaQuery.of(context).size.width,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                onPressed: () async {
-                  setState(() {
-                    _isLoading = true;
-                  });
-                  try {
-                    final email = _emailController.text;
-                    final password = _passwordController.text;
-                    final nama = _namaController.text;
-                    final npm = _npmController.text;
-                    final prodi = _prodiController.text;
-                    final fakultas = _fakultasController.text;
+    return Form(
+      key: _formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _isLoading ? Center(child: CircularProgressIndicator()) : Container(),
+          Hero(
+            tag: 'UniBike',
+            child: Text(
+              'UniBike',
+              style: Theme.of(context).textTheme.headline1,
+            ),
+          ),
+          SizedBox(height: 24.0),
+          Text(
+            'Create your account',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+          SizedBox(height: 8.0),
+          TextFormField(
+            style: TextStyle(color: primaryColor),
+            controller: _emailController,
+            keyboardType: TextInputType.emailAddress,
+            validator: (text) {
+              if (text != null && text.isNotEmpty) {
+                return null;
+              } else {
+                return 'Email Can\'t Be Empty';
+              }
+            },
+            decoration: InputDecoration(
+              hintText: 'Email',
+              hintStyle: Theme.of(context).textTheme.subtitle2,
+            ),
+          ),
+          SizedBox(height: 8.0),
+          TextFormField(
+            style: TextStyle(color: primaryColor),
+            cursorColor: primaryColor,
+            controller: _passwordController,
+            obscureText: _obscureText,
+            validator: (text) {
+              if (text != null && text.isNotEmpty) {
+                return null;
+              } else {
+                return 'Password Can\'t Be Empty';
+              }
+            },
+            decoration: InputDecoration(
+              hintText: 'Password',
+              hintStyle: Theme.of(context).textTheme.subtitle2,
+            ),
+          ),
+          SizedBox(height: 8.0),
+          TextFormField(
+            style: TextStyle(color: primaryColor),
+            controller: _namaController,
+            validator: (text) {
+              if (text != null && text.isNotEmpty) {
+                return null;
+              } else {
+                return 'Nama Can\'t Be Empty';
+              }
+            },
+            decoration: InputDecoration(
+              hintText: 'Nama',
+              hintStyle: Theme.of(context).textTheme.subtitle2,
+            ),
+          ),
+          SizedBox(height: 8.0),
+          TextFormField(
+            style: TextStyle(color: primaryColor),
+            controller: _npmController,
+            validator: (text) {
+              if (text != null && text.isNotEmpty) {
+                return null;
+              } else {
+                return 'NPM Can\'t Be Empty';
+              }
+            },
+            decoration: InputDecoration(
+              hintText: 'NPM',
+              hintStyle: Theme.of(context).textTheme.subtitle2,
+            ),
+          ),
+          SizedBox(height: 8.0),
+          TextFormField(
+            style: TextStyle(color: primaryColor),
+            controller: _prodiController,
+            validator: (text) {
+              if (text != null && text.isNotEmpty) {
+                return null;
+              } else {
+                return 'Program Studi Can\'t Be Empty';
+              }
+            },
+            decoration: InputDecoration(
+              hintText: 'Program Studi',
+              hintStyle: Theme.of(context).textTheme.subtitle2,
+            ),
+          ),
+          SizedBox(height: 8.0),
+          TextFormField(
+            style: TextStyle(color: primaryColor),
+            controller: _fakultasController,
+            keyboardType: TextInputType.emailAddress,
+            validator: (text) {
+              if (text != null && text.isNotEmpty) {
+                return null;
+              } else {
+                return 'Fakultas Can\'t Be Empty';
+              }
+            },
+            decoration: InputDecoration(
+              hintText: 'Fakultas',
+              hintStyle: Theme.of(context).textTheme.subtitle2,
+            ),
+          ),
+          SizedBox(height: 24.0),
+          MaterialButton(
+            child: Text('Register'),
+            color: Theme.of(context).primaryColor,
+            textTheme: ButtonTextTheme.primary,
+            height: 53,
+            minWidth: MediaQuery.of(context).size.width,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            onPressed: () async {
+              setState(() {
+                _isLoading = true;
+                if (!_formKey.currentState!.validate()) {
+                  return;
+                }
+              });
+              try {
+                final email = _emailController.text;
+                final password = _passwordController.text;
+                final nama = _namaController.text;
+                final npm = _npmController.text;
+                final prodi = _prodiController.text;
+                final fakultas = _fakultasController.text;
 
-                    await _auth.createUserWithEmailAndPassword(
-                        email: email, password: password);
+                await _auth.createUserWithEmailAndPassword(
+                    email: email, password: password);
 
-                    _store.collection('users').doc(_auth.currentUser?.uid).set({
-                      'email': email,
-                      'password': password,
-                      'nama': nama,
-                      'npm': npm,
-                      'prodi': prodi,
-                      'fakultas': fakultas
-                    });
-                    Navigator.pop(context);
-                  } catch (e) {
-                    final snackbar = SnackBar(content: Text(e.toString()));
-                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                  } finally {
-                    setState(
-                      () {
-                        _isLoading = false;
-                      },
-                    );
-                  }
-                },
-              ),
-              TextButton(
-                child: Text('Already have an account? Login',
-                    style: TextStyle(color: secondaryColor)),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
-          );
+                _store.collection('users').doc(_auth.currentUser?.uid).set({
+                  'email': email,
+                  'password': password,
+                  'nama': nama,
+                  'npm': npm,
+                  'prodi': prodi,
+                  'fakultas': fakultas
+                });
+                Navigator.pop(context);
+              } catch (e) {
+                final snackbar = SnackBar(content: Text(e.toString()));
+                ScaffoldMessenger.of(context).showSnackBar(snackbar);
+              } finally {
+                setState(
+                  () {
+                    _isLoading = false;
+                  },
+                );
+              }
+            },
+          ),
+          TextButton(
+            child: Text('Already have an account? Login',
+                style: TextStyle(color: secondaryColor)),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ],
+      ),
+    );
   }
-  
 
   @override
   void dispose() {
