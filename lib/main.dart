@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:unibike/common/router.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/preferences/preferences_helper.dart';
 import 'package:unibike/provider/alarm_provider.dart';
@@ -57,17 +58,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: themeData,
         initialRoute: SplashScreen.routeName,
-        routes: {
-          SplashScreen.routeName: (context) => SplashScreen(),
-          HomePage.routeName: (context) => HomePage(),
-          LoginPage.routeName: (context) => LoginPage(),
-          RegisterPage.routeName: (context) => RegisterPage(),
-          StatusPinjamPage.routeName: (context) => StatusPinjamPage(),
-          ProfilePage.routeName: (context) => ProfilePage(),
-          MainPage.routeName: (context) => MainPage(),
-          BikeDetailPage.routeName: (context) => BikeDetailPage(
-              bike: ModalRoute.of(context)?.settings.arguments as Bike)
-        },
+        onGenerateRoute: RouterHelper.generateRoute
       ),
     );
   }

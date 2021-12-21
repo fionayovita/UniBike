@@ -18,10 +18,10 @@ class BikeDetailPage extends StatefulWidget {
   final firebase = FirebaseAuth.instance;
   final _store = FirebaseFirestore.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  String fakultas = '';
 
   final Bike bike;
-  BikeDetailPage({required this.bike});
+  final String fakultas;
+  BikeDetailPage({required this.bike, required this.fakultas});
 
   @override
   State<BikeDetailPage> createState() => _BikeDetailPageState();
@@ -142,13 +142,6 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
                               final dateFormatKembali =
                                   DateFormat('EEE d MMM, hh:mm a')
                                       .format(kembali);
-
-                              DropDownMenu(
-                                onChanged: (value) {
-                                  widget.fakultas = value;
-                                },
-                              );
-                              print('di detail: ${widget.fakultas}');
 
                               widget._store
                                   .collection('data_peminjaman')

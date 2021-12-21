@@ -79,7 +79,7 @@ class _CustomDialogState extends State<CustomDialog> {
           child: CircleAvatar(
             backgroundColor: secondaryColor,
             radius: 50.0,
-            child: widget.text == 'Ok'
+            child: widget.title == 'Sukses Pinjam Sepeda!'
                 ? Icon(
                     Icons.file_download_done_rounded,
                     color: primaryColor,

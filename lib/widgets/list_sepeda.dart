@@ -8,7 +8,8 @@ import 'package:unibike/widgets/card_sepeda.dart';
 class ListSepeda extends StatelessWidget {
   final int length;
   final int gridCount;
-  ListSepeda({required this.length, required this.gridCount});
+  final String? fakultas;
+  ListSepeda({required this.length, required this.gridCount,required this.fakultas});
 
 
   @override
@@ -26,7 +27,7 @@ class ListSepeda extends StatelessWidget {
               crossAxisCount: gridCount,
               shrinkWrap: true,
               children: List.generate(length, (index) {
-                return CardSepeda(bike: bike[index]);
+                return CardSepeda(bike: bike[index], fakultas: fakultas);
               }),
             );
           } else if (state.state == ResultState.NoData) {

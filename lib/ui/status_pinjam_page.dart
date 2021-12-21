@@ -35,21 +35,6 @@ class _StatusPinjamPageState extends State<StatusPinjamPage> {
     );
   }
 
-  Widget _contentEmpty(BuildContext context) {
-    return Center(
-        child: Column(
-      children: <Widget>[
-        Image.asset(
-          'assets/logoBulet.png',
-          width: 300,
-          height: 300,
-        ),
-        Text('Anda belum meminjam sepeda',
-            style: Theme.of(context).textTheme.headline5)
-      ],
-    ));
-  }
-
   Widget _contentPinjam(BuildContext context) {
     statusPinjam = true;
 
@@ -63,8 +48,8 @@ class _StatusPinjamPageState extends State<StatusPinjamPage> {
                 child: Column(children: <Widget>[
               Image.asset(
                 'assets/logoBulet.png',
-                width: 300,
-                height: 300,
+                width: 250,
+                height: 250,
               ),
               Text("Something went wrong",
                   style: Theme.of(context).textTheme.headline5)
@@ -77,9 +62,10 @@ class _StatusPinjamPageState extends State<StatusPinjamPage> {
                 children: <Widget>[
                   Image.asset(
                     'assets/logoBulet.png',
-                    width: 300,
-                    height: 300,
+                    width: 250,
+                    height: 250,
                   ),
+                  SizedBox(height: 15.0),
                   Text('Anda belum meminjam sepeda',
                       style: Theme.of(context).textTheme.headline5)
                 ],

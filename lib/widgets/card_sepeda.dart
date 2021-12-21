@@ -4,16 +4,24 @@ import 'package:unibike/common/styles.dart';
 import 'package:unibike/model/bike_model.dart';
 import 'package:unibike/ui/bike_detail_page.dart';
 
+class CardSepedaArgs {
+  final Bike bike;
+  final String? fakultas;
+
+  CardSepedaArgs({required this.bike, required this.fakultas});
+}
+
 class CardSepeda extends StatelessWidget {
   final Bike bike;
+  final String? fakultas;
 
-  CardSepeda({required this.bike});
+  CardSepeda({required this.bike, required this.fakultas});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, BikeDetailPage.routeName, arguments: bike);
+        Navigator.pushNamed(context, BikeDetailPage.routeName, arguments: CardSepedaArgs(bike: bike, fakultas: fakultas));
       },
       child: Card(
         elevation: 2,

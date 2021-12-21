@@ -110,7 +110,8 @@ class DropDownMenuState extends State<DropDownMenu> {
                       getDropDownItem();
                       print('widget ${widget.fakultasMain}');
                       lengthBike = lengthFakultas();
-                      ListSepeda(length: lengthBike, gridCount: 4);
+                      ListSepeda(
+                          length: lengthBike, gridCount: 4, fakultas: fakultas);
                     },
                   );
                 },
@@ -119,25 +120,49 @@ class DropDownMenuState extends State<DropDownMenu> {
           ),
         ),
         SizedBox(height: 18.0),
-        Text(
-          fakultas == null
-              ? 'Pilih fakultas untuk melihat jumlah sepeda'
-              : 'Sepeda yang tersedia di fakultas $fakultas: $lengthBike',
-          style: Theme.of(context).textTheme.subtitle1,
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(height: 15.0),
-        LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            if (constraints.maxWidth <= 700) {
-              return ListSepeda(length: lengthBike, gridCount: 2);
-            } else if (constraints.maxWidth <= 1500) {
-              return ListSepeda(length: lengthBike, gridCount: 4);
-            } else {
-              return ListSepeda(length: lengthBike, gridCount: 6);
-            }
-          },
-        ),
+        Container(
+            child: fakultas == null
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Pilih fakultas untuk melihat jumlah sepeda',
+                          style: Theme.of(context).textTheme.subtitle1),
+                      SizedBox(height: 40.0),
+                      Image.asset("assets/logoBulet.png",
+                          width: 250, height: 250)
+                    ],
+                  )
+                : Column(
+                    children: [
+                      Text(
+                          'Sepeda yang tersedia di fakultas $fakultas: $lengthBike',
+                          style: Theme.of(context).textTheme.subtitle1,
+                          textAlign: TextAlign.center),
+                      SizedBox(height: 15.0),
+                      LayoutBuilder(
+                        builder:
+                            (BuildContext context, BoxConstraints constraints) {
+                          if (constraints.maxWidth <= 700) {
+                            return ListSepeda(
+                              length: lengthBike,
+                              gridCount: 2,
+                              fakultas: fakultas,
+                            );
+                          } else if (constraints.maxWidth <= 1500) {
+                            return ListSepeda(
+                                length: lengthBike,
+                                gridCount: 4,
+                                fakultas: fakultas);
+                          } else {
+                            return ListSepeda(
+                                length: lengthBike,
+                                gridCount: 6,
+                                fakultas: fakultas);
+                          }
+                        },
+                      ),
+                    ],
+                  )),
       ],
     );
   }
