@@ -71,7 +71,6 @@ class DropDownMenuState extends State<DropDownMenu> {
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          //alignment: Alignment.center,
           padding: EdgeInsets.symmetric(horizontal: 17, vertical: 5),
           decoration: BoxDecoration(
             color: secondaryColor,
@@ -87,56 +86,58 @@ class DropDownMenuState extends State<DropDownMenu> {
           ),
           child: DropdownButtonHideUnderline(
             child: ButtonTheme(
-            child: DropdownButton(
-            iconEnabledColor: primaryColor,
-            dropdownColor: secondaryColor,
-            hint: Text("Pilih Fakultas",
-                style: Theme.of(context).textTheme.subtitle2),
-            value: fakultas,
-            items: _listFakultas.map(
-              (value) {
-                return DropdownMenuItem<String>(
-                  child:
-                      Text(value, style: Theme.of(context).textTheme.subtitle2),
-                  value: value,
-                );
-              },
-            ).toList(),
-            onChanged: (value) {
-              setState(
-                () {
-                  fakultas = value as String;
-                  widget.fakultasMain = value;
-                  widget.onChanged(value);
-                  getDropDownItem();
-                  print('widget ${widget.fakultasMain}');
-                  lengthBike = lengthFakultas();
-                  ListSepeda(length: lengthBike, gridCount: 4);
+              child: DropdownButton(
+                iconEnabledColor: primaryColor,
+                dropdownColor: secondaryColor,
+                hint: Text("Pilih Fakultas",
+                    style: Theme.of(context).textTheme.subtitle2),
+                value: fakultas,
+                items: _listFakultas.map(
+                  (value) {
+                    return DropdownMenuItem<String>(
+                      child: Text(value,
+                          style: Theme.of(context).textTheme.subtitle2),
+                      value: value,
+                    );
+                  },
+                ).toList(),
+                onChanged: (value) {
+                  setState(
+                    () {
+                      fakultas = value as String;
+                      widget.fakultasMain = value;
+                      widget.onChanged(value);
+                      getDropDownItem();
+                      print('widget ${widget.fakultasMain}');
+                      lengthBike = lengthFakultas();
+                      ListSepeda(length: lengthBike, gridCount: 4);
+                    },
+                  );
                 },
-              );
-            },
+              ),
+            ),
           ),
-          ),
-          ),
-          
         ),
         SizedBox(height: 18.0),
         Text(
-            fakultas == null
-                ? 'Pilih fakultas untuk melihat jumlah sepeda'
-                : 'Sepeda yang tersedia di fakultas $fakultas: $lengthBike',
-            style: Theme.of(context).textTheme.subtitle1, textAlign: TextAlign.center,), 
+          fakultas == null
+              ? 'Pilih fakultas untuk melihat jumlah sepeda'
+              : 'Sepeda yang tersedia di fakultas $fakultas: $lengthBike',
+          style: Theme.of(context).textTheme.subtitle1,
+          textAlign: TextAlign.center,
+        ),
         SizedBox(height: 15.0),
-        LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth <= 700) {
-          return ListSepeda(length: lengthBike, gridCount: 2);
-        } else if (constraints.maxWidth <= 1500) {
-            return ListSepeda(length: lengthBike, gridCount: 4);
-        } else {
-          return ListSepeda(length: lengthBike, gridCount: 6);
-          } 
-        },
-      ),
+        LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxWidth <= 700) {
+              return ListSepeda(length: lengthBike, gridCount: 2);
+            } else if (constraints.maxWidth <= 1500) {
+              return ListSepeda(length: lengthBike, gridCount: 4);
+            } else {
+              return ListSepeda(length: lengthBike, gridCount: 6);
+            }
+          },
+        ),
       ],
     );
   }

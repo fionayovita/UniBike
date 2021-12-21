@@ -58,46 +58,54 @@ class _ProfilePageState extends State<ProfilePage> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      FutureBuilder<String>(
-                        future: loadImage(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<String> image) {
-                          if (image.connectionState ==
-                              ConnectionState.waiting) {
-                            return Center(child: CircularProgressIndicator());
-                          }
-                          if (image.hasData) {
-                            return Stack(children: <Widget>[
-                              Container(
-                                child: image != null
-                                    ? Image.network(image.data.toString())
-                                    : Icon(Icons.person, color: secondaryColor),
-                              ),
-                              Positioned(
-                                bottom: 20.0,
-                                right: 40.0,
-                                child: InkWell(
-                                  onTap: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      builder: ((builder) => popUpOption()),
-                                    );
-                                  },
-                                  child: Icon(
-                                    Icons.camera_alt,
-                                    color: secondaryColor,
-                                    size: 28.0,
-                                  ),
+                      Container(
+                        alignment: Alignment.center,
+                        color: secondaryColor,
+                        width: 300,
+                        height: 300,
+                        child: Stack(
+                          children: <Widget>[
+                            FutureBuilder<String>(
+                              future: loadImage(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<String> image) {
+                                if (image.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Center(
+                                      child: CircularProgressIndicator());
+                                }
+                                if (image.hasData) {
+                                  return Image.network(
+                                    image.data.toString(),
+                                    fit: BoxFit.cover,
+                                  );
+                                } else {
+                                  return Text('No Picture',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1); // placeholder
+                                }
+                              },
+                            ),
+                            Positioned(
+                              bottom: 20.0,
+                              right: 40.0,
+                              child: InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: ((builder) => popUpOption()),
+                                  );
+                                },
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  color: primaryColor,
+                                  size: 28.0,
                                 ),
                               ),
-                            ]);
-                          } else {
-                            return Text('Loading',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle1); // placeholder
-                          }
-                        },
+                            )
+                          ],
+                        ),
                       ),
                       SizedBox(height: 25.0),
                       Center(
@@ -213,8 +221,12 @@ class _ProfilePageState extends State<ProfilePage> {
             children: <Widget>[
               ElevatedButton.icon(
                 onPressed: () {
-                  takePhoto(ImageSource.camera);
-                  print(_image);
+                  setState(() {
+                    takePhoto(ImageSource.camera);
+                    loadImage();
+                    print(_image);
+                    Navigator.pop(context);
+                  });
                 },
                 icon: Icon(Icons.camera_alt),
                 label: Text('Camera'),
@@ -222,8 +234,12 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(width: 20),
               ElevatedButton.icon(
                 onPressed: () {
-                  takePhoto(ImageSource.gallery);
-                  print(_image);
+                  setState(() {
+                    takePhoto(ImageSource.gallery);
+                    loadImage();
+                    print(_image);
+                    Navigator.pop(context);
+                  });
                 },
                 icon: Icon(Icons.photo_size_select_actual_outlined),
                 label: Text('Gallery'),
@@ -243,6 +259,11 @@ class _ProfilePageState extends State<ProfilePage> {
           .child('profile_picture')
           .child('$currentUser')
           .putFile(_image);
+
+      print('current user: $currentUser');
+      setState(() {
+        loadImage();
+      });
     } on FirebaseException catch (e) {
       print(e);
     }
@@ -250,7 +271,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<String>? loadImage() async {
     String currentUser = firebase.currentUser!.uid.toString();
-    var url;
+    print('current user: $currentUser');
+    var url = null ??
+        'https://firebasestorage.googleapis.com/v0/b/unibike-13780.appspot.com/o/profile_picture%2Favatar.png?alt=media&token=ee107873-773f-4683-b2f7-572c16e1a494';
     try {
       Reference ref = await FirebaseStorage.instance
           .ref()
@@ -258,7 +281,7 @@ class _ProfilePageState extends State<ProfilePage> {
           .child('$currentUser');
 
       url = await ref.getDownloadURL();
-      print(url);
+      print('url foto profile: $url');
     } on FirebaseException catch (e) {
       print(e);
     }
@@ -273,6 +296,7 @@ class _ProfilePageState extends State<ProfilePage> {
         _image = File(pickedFile.path);
         print(_image);
         uploadFile();
+        loadImage();
       });
     }
   }
