@@ -21,17 +21,11 @@ final TextTheme myTextTheme = TextTheme(
       letterSpacing: 0.25,
       color: darkPrimaryColor),
   headline3: GoogleFonts.poppins(
-      fontSize: 23, 
-      fontWeight: FontWeight.bold, 
-      color: primaryColor),
+      fontSize: 23, fontWeight: FontWeight.bold, color: primaryColor),
   headline4: GoogleFonts.poppins(
-      fontSize: 21, 
-      fontWeight: FontWeight.bold, 
-      color: primaryColor),
+      fontSize: 21, fontWeight: FontWeight.bold, color: primaryColor),
   headline5: GoogleFonts.poppins(
-      fontSize: 18, 
-      fontWeight: FontWeight.bold, 
-      color: darkPrimaryColor),
+      fontSize: 18, fontWeight: FontWeight.bold, color: darkPrimaryColor),
   headline6: GoogleFonts.rubik(
       fontSize: 18,
       fontWeight: FontWeight.w500,
@@ -62,6 +56,10 @@ final TextTheme myTextTheme = TextTheme(
 final themeData = ThemeData(
   textTheme: myTextTheme,
   primaryColor: primaryColor,
+  appBarTheme: AppBarTheme(
+    color: primaryColor,
+    elevation: 0,
+  ),
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: secondaryColor),
   scaffoldBackgroundColor: Colors.white,
   visualDensity: VisualDensity.adaptivePlatformDensity,

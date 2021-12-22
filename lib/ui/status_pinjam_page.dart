@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:unibike/common/styles.dart';
 import 'package:unibike/provider/alarm_provider.dart';
@@ -17,7 +18,6 @@ class StatusPinjamPage extends StatefulWidget {
 
 class _StatusPinjamPageState extends State<StatusPinjamPage> {
   final firebase = FirebaseAuth.instance;
-
   final firestore = FirebaseFirestore.instance;
   bool statusPinjam = false;
 
@@ -172,6 +172,28 @@ class _StatusPinjamPageState extends State<StatusPinjamPage> {
                               setState(() {
                                 statusPinjam = false;
                               });
+
+                              var waktuKembali = DateTime.now();
+                              String dateFormatKembali =
+                                  DateFormat('EEE d MMM, hh:mm a')
+                                      .format(waktuKembali);
+
+                              firestore
+                                  .collection('history_peminjaman')
+                                  .doc(firebase.currentUser?.uid)
+                                  .collection('user_history')
+                                  .doc()
+                                  .set(
+                                {
+                                  'id_sepeda': data['id_sepeda'],
+                                  'jenis_sepeda': data['jenis_sepeda'],
+                                  'email_peminjam': data['email_peminjam'],
+                                  'waktu_pinjam': data['waktu_pinjam'],
+                                  'waktu_kembali': dateFormatKembali,
+                                  'fakultas': data['fakultas']
+                                },
+                              );
+
                               firestore
                                   .collection('data_peminjaman')
                                   .doc(firebase.currentUser?.uid)
@@ -183,8 +205,6 @@ class _StatusPinjamPageState extends State<StatusPinjamPage> {
 
                               scheduled.scheduledNews(false);
                               provider.enableAlarm(false);
-
-                              
                             },
                           );
                         },

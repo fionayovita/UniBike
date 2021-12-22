@@ -24,56 +24,50 @@ class _MainPageState extends State<MainPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth <= 700) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 17.0, vertical: 20.0),
-            child: _textField(context)
-          );
-        } else if (constraints.maxWidth <= 1500) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 200.0, vertical: 20.0),
-            child: _textField(context)
-          );
-        }
-        else {
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 550.0, vertical: 20.0),
-            child: _textField(context)
-            );
-          } 
-        },
+            builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxWidth <= 700) {
+                return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 17.0, vertical: 20.0),
+                    child: _textField(context));
+              } else if (constraints.maxWidth <= 1500) {
+                return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 200.0, vertical: 20.0),
+                    child: _textField(context));
+              } else {
+                return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 550.0, vertical: 20.0),
+                    child: _textField(context));
+              }
+            },
+          ),
+        ),
       ),
-    ),
-  ),
-);
-}
+    );
+  }
 
-
-Widget _textField(BuildContext context) {
-    return 
-Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Hi, bikers!",
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-                SizedBox(height: 15.0),
-                Text(
-                  "Find a Bike to go\naround the Campus",
-                  style: Theme.of(context).textTheme.headline2,
-                ),
-                SizedBox(height: 25.0),
-                DropDownMenu(onChanged: (value) {
-                  widget.fakultas = value;
-                  print('DIMAIN BARU: ${widget.fakultas}');
-                }),
-                SizedBox(height: 15.0),
-              ],
-            );
-}
+  Widget _textField(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Hi, bikers!",
+          style: Theme.of(context).textTheme.headline5,
+        ),
+        SizedBox(height: 15.0),
+        Text(
+          "Find a Bike to go\naround the Campus",
+          style: Theme.of(context).textTheme.headline2,
+        ),
+        SizedBox(height: 25.0),
+        DropDownMenu(onChanged: (value) {
+          widget.fakultas = value;
+          print('Fakultas yang dipilih: ${widget.fakultas}');
+        }),
+        SizedBox(height: 15.0),
+      ],
+    );
+  }
 }

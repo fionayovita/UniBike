@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unibike/ui/bike_detail_page.dart';
+import 'package:unibike/ui/history_peminjaman_page.dart';
 import 'package:unibike/ui/home_page.dart';
 import 'package:unibike/ui/login_page.dart';
 import 'package:unibike/ui/main_page.dart';
@@ -24,6 +25,8 @@ class RouterHelper {
         return MaterialPageRoute(builder: (_) => StatusPinjamPage());
       case ProfilePage.routeName:
         return MaterialPageRoute(builder: (_) => ProfilePage());
+      case HistoryPeminjamanPage.routeName:
+        return MaterialPageRoute(builder: (_) => HistoryPeminjamanPage());
       case MainPage.routeName:
         return MaterialPageRoute(builder: (_) => MainPage());
       case BikeDetailPage.routeName:

@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
+import 'package:unibike/ui/history_peminjaman_page.dart';
 import 'package:unibike/ui/main_page.dart';
 import 'package:unibike/ui/profile_page.dart';
 import 'package:unibike/ui/status_pinjam_page.dart';
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _listPages() => [
         MainPage(),
         StatusPinjamPage(),
+        HistoryPeminjamanPage(),
         ProfilePage(),
       ];
 
@@ -40,6 +42,11 @@ class _HomePageState extends State<HomePage> {
           ),
           Icon(
             Icons.note_alt_outlined,
+            size: 30,
+            color: primaryColor,
+          ),
+          Icon(
+            Icons.history,
             size: 30,
             color: primaryColor,
           ),
