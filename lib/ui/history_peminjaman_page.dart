@@ -19,7 +19,13 @@ class HistoryPeminjamanPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Text('Riwayat Peminjaman',
             style: Theme.of(context).textTheme.headline5),
-        toolbarHeight: 65,
+        toolbarHeight: 70,
+        bottom: PreferredSize(
+        child: Container(
+         color: Colors.black12,
+         height: 0.3,
+      ),
+      preferredSize: Size.fromHeight(4.0)),
       ),
       body: SafeArea(
         child: Center(

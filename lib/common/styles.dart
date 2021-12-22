@@ -57,7 +57,7 @@ final themeData = ThemeData(
   textTheme: myTextTheme,
   primaryColor: primaryColor,
   appBarTheme: AppBarTheme(
-    color: primaryColor,
+    color: Colors.transparent,
     elevation: 0,
   ),
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: secondaryColor),
