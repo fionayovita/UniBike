@@ -17,7 +17,7 @@ class DropDownMenu extends StatefulWidget {
 
 class DropDownMenuState extends State<DropDownMenu> {
   String? fakultas;
-  int lengthBike = 0;
+  int lengthBike = 1;
 
   List _listFakultas = [
     "Teknik",
@@ -33,36 +33,24 @@ class DropDownMenuState extends State<DropDownMenu> {
   int lengthFakultas() {
     int length = lengthBike;
     if (fakultas == 'Teknik') {
-      length = 2;
+      length = 3;
     } else if (fakultas == 'MIPA') {
       length = 6;
     } else if (fakultas == 'Ekonomi') {
-      length = 1;
+      length = 8;
     } else if (fakultas == 'Kedokteran') {
-      lengthBike = 7;
+      lengthBike = 5;
     } else if (fakultas == 'Pertanian') {
-      lengthBike = 7;
+      lengthBike = 3;
     } else if (fakultas == 'Keguruan dan Ilmu Pendidikan') {
       length = 11;
     } else if (fakultas == 'Ilmu Sosial dan Pemerintahan') {
       length = 4;
     } else if (fakultas == 'Hukum') {
       length = 9;
-    } else {
-      length;
     }
-    print('di length fakultas: $fakultas');
     lengthBike = length;
     return length;
-  }
-
-  String getDropDownItem() {
-    setState(() {
-      widget.fakultasMain = fakultas!;
-    });
-    print('getdropdown fakultas: $fakultas');
-    print('getdropdown fakultasMain: ${widget.fakultasMain}');
-    return widget.fakultasMain;
   }
 
   @override
@@ -107,8 +95,6 @@ class DropDownMenuState extends State<DropDownMenu> {
                       fakultas = value as String;
                       widget.fakultasMain = value;
                       widget.onChanged(value);
-                      getDropDownItem();
-                      print('widget ${widget.fakultasMain}');
                       lengthBike = lengthFakultas();
                       ListSepeda(
                           length: lengthBike, gridCount: 4, fakultas: fakultas);
@@ -121,48 +107,48 @@ class DropDownMenuState extends State<DropDownMenu> {
         ),
         SizedBox(height: 18.0),
         Container(
-            child: fakultas == null
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Pilih fakultas untuk melihat jumlah sepeda',
-                          style: Theme.of(context).textTheme.subtitle1),
-                      SizedBox(height: 40.0),
-                      Image.asset("assets/logoBulet.png",
-                          width: 250, height: 250)
-                    ],
-                  )
-                : Column(
-                    children: [
-                      Text(
-                          'Sepeda yang tersedia di fakultas $fakultas: $lengthBike',
-                          style: Theme.of(context).textTheme.subtitle1,
-                          textAlign: TextAlign.center),
-                      SizedBox(height: 15.0),
-                      LayoutBuilder(
-                        builder:
-                            (BuildContext context, BoxConstraints constraints) {
-                          if (constraints.maxWidth <= 700) {
-                            return ListSepeda(
+          child: fakultas == null
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Pilih fakultas untuk melihat jumlah sepeda',
+                        style: Theme.of(context).textTheme.subtitle1),
+                    SizedBox(height: 40.0),
+                    Image.asset("assets/logoBulet.png", width: 250, height: 250)
+                  ],
+                )
+              : Column(
+                  children: [
+                    Text(
+                        'Sepeda yang tersedia di fakultas $fakultas: $lengthBike',
+                        style: Theme.of(context).textTheme.subtitle1,
+                        textAlign: TextAlign.center),
+                    SizedBox(height: 15.0),
+                    LayoutBuilder(
+                      builder:
+                          (BuildContext context, BoxConstraints constraints) {
+                        if (constraints.maxWidth <= 700) {
+                          return ListSepeda(
+                            length: lengthBike,
+                            gridCount: 2,
+                            fakultas: fakultas,
+                          );
+                        } else if (constraints.maxWidth <= 1500) {
+                          return ListSepeda(
                               length: lengthBike,
-                              gridCount: 2,
-                              fakultas: fakultas,
-                            );
-                          } else if (constraints.maxWidth <= 1500) {
-                            return ListSepeda(
-                                length: lengthBike,
-                                gridCount: 4,
-                                fakultas: fakultas);
-                          } else {
-                            return ListSepeda(
-                                length: lengthBike,
-                                gridCount: 6,
-                                fakultas: fakultas);
-                          }
-                        },
-                      ),
-                    ],
-                  )),
+                              gridCount: 4,
+                              fakultas: fakultas);
+                        } else {
+                          return ListSepeda(
+                              length: lengthBike,
+                              gridCount: 6,
+                              fakultas: fakultas);
+                        }
+                      },
+                    ),
+                  ],
+                ),
+        ),
       ],
     );
   }

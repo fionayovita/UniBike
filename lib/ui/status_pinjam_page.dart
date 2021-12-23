@@ -51,7 +51,7 @@ class _StatusPinjamPageState extends State<StatusPinjamPage> {
                 width: 250,
                 height: 250,
               ),
-              Text("Something went wrong",
+              Text("Terjadi kesalahan, silahkan kembali ke halaman sebelumnya.",
                   style: Theme.of(context).textTheme.headline5)
             ]));
           }

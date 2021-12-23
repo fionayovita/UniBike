@@ -21,49 +21,97 @@ class HistoryPeminjamanPage extends StatelessWidget {
             style: Theme.of(context).textTheme.headline5),
         toolbarHeight: 70,
         bottom: PreferredSize(
-        child: Container(
-         color: Colors.black12,
-         height: 0.3,
-      ),
-      preferredSize: Size.fromHeight(4.0)),
+            child: Container(
+              color: Colors.black12,
+              height: 0.3,
+            ),
+            preferredSize: Size.fromHeight(4.0)),
       ),
       body: SafeArea(
         child: Center(
           child: Padding(
-              padding: const EdgeInsets.all(10.0), child: _listPinjam(context)),
+              padding: const EdgeInsets.all(0.0), child: _listPinjam(context)),
         ),
       ),
     );
   }
 
   Widget _listPinjam(BuildContext context) {
-    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-      stream: history
-          .doc(firebase.currentUser?.uid)
-          .collection('user_history')
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context, index) {
-              final data = snapshot.data!.docs[index];
-              final jenisSepeda = data['jenis_sepeda'];
-              final fakultas = data['fakultas'];
-              final waktuPinjam = data['waktu_pinjam'];
-              final waktuKembali = data['waktu_kembali'];
+    return Center(
+      child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: history
+            .doc(firebase.currentUser?.uid)
+            .collection('user_history')
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Column(
+                children: <Widget>[
+                  Image.asset(
+                    'assets/logoBulet.png',
+                    width: 250,
+                    height: 250,
+                  ),
+                  SizedBox(height: 15.0),
+                  Text(
+                      'Terjadi kesalahan, silahkan kembali ke halaman sebelumnya.',
+                      style: Theme.of(context).textTheme.headline5)
+                ],
+              ),
+            );
+          }
+          if (!snapshot.hasData) {
+            return Center(
+              child: Column(
+                children: <Widget>[
+                  Image.asset(
+                    'assets/logoBulet.png',
+                    width: 250,
+                    height: 250,
+                  ),
+                  SizedBox(height: 15.0),
+                  Text('Tidak ada riwayat peminjaman',
+                      style: Theme.of(context).textTheme.headline5)
+                ],
+              ),
+            );
+          }
 
-              return CardHistory(
-                  jenisSepeda: jenisSepeda,
-                  fakultas: fakultas,
-                  waktuPinjam: waktuPinjam,
-                  waktuKembali: waktuKembali);
-            });
-      },
+          return snapshot.hasData &&
+                  snapshot.connectionState == ConnectionState.done
+              ? ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    final data = snapshot.data!.docs[index];
+                    final jenisSepeda = data['jenis_sepeda'];
+                    final fakultas = data['fakultas'];
+                    final waktuPinjam = data['waktu_pinjam'];
+                    final waktuKembali = data['waktu_kembali'];
+
+                    return CardHistory(
+                        jenisSepeda: jenisSepeda,
+                        fakultas: fakultas,
+                        waktuPinjam: waktuPinjam,
+                        waktuKembali: waktuKembali);
+                  },
+                )
+              : Center(
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/logoBulet.png',
+                        width: 250,
+                        height: 250,
+                      ),
+                      SizedBox(height: 15.0),
+                      Text('Tidak ada riwayat peminjaman.',
+                          style: Theme.of(context).textTheme.headline5)
+                    ],
+                  ),
+                );
+        },
+      ),
     );
   }
 }

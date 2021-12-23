@@ -1,8 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:unibike/common/navigation.dart';
 import 'package:unibike/model/bike_model.dart';
+import 'package:unibike/ui/status_pinjam_page.dart';
 
 final selectNotificationSubject = BehaviorSubject<String>();
 
@@ -68,9 +69,7 @@ class NotificationHelper {
   void configureSelectNotificationSubject(String route) {
     selectNotificationSubject.stream.listen(
       (String payload) async {
-        // var data = BikeResult.fromJson(json.decode(payload));
-        // // var bike = data.bikes[randomNumber];
-        // Navigator.pushNamed(StatusPinjamPage.routeName);
+        Navigation.intentWithData(StatusPinjamPage.routeName);
       },
     );
   }

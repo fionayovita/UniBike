@@ -17,7 +17,8 @@ class BikeDetailPage extends StatefulWidget {
 
   final firebase = FirebaseAuth.instance;
   final _store = FirebaseFirestore.instance;
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  final CollectionReference users =
+      FirebaseFirestore.instance.collection('users');
 
   final Bike bike;
   final String fakultas;
@@ -131,7 +132,6 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
                       builder: (context, scheduled, child) {
                         return ElevatedButton(
                           onPressed: () {
-                            bool _isLoading = false;
                             try {
                               final jenisSepeda = widget.bike.frameModel;
                               var today = DateTime.now();
@@ -171,21 +171,7 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
                                   );
                                 },
                               );
-
-                              final snackBar = SnackBar(
-                                content: Text(
-                                  'Sukses Pinjam Sepeda dengan id: $id',
-                                  style: Theme.of(context).textTheme.subtitle2,
-                                ),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
                             } catch (e) {
-                              final snackbar =
-                                  SnackBar(content: Text(e.toString()));
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackbar);
-
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -202,7 +188,6 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
                                 () {
                                   widget.fakultas;
                                   print('di finally: ${widget.fakultas}');
-                                  _isLoading = false;
                                 },
                               );
                             }

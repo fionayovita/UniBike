@@ -23,7 +23,6 @@ class _ProfilePageState extends State<ProfilePage> {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   FirebaseStorage storage = FirebaseStorage.instance;
 
-
   var _image;
   final ImagePicker _picker = ImagePicker();
 

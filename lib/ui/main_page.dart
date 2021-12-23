@@ -62,10 +62,7 @@ class _MainPageState extends State<MainPage> {
           style: Theme.of(context).textTheme.headline2,
         ),
         SizedBox(height: 25.0),
-        DropDownMenu(onChanged: (value) {
-          widget.fakultas = value;
-          print('Fakultas yang dipilih: ${widget.fakultas}');
-        }),
+        DropDownMenu(),
         SizedBox(height: 15.0),
       ],
     );
