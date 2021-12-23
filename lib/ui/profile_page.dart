@@ -93,7 +93,19 @@ class _ProfilePageState extends State<ProfilePage> {
                       builder:
                           (BuildContext context, AsyncSnapshot<String> image) {
                         if (image.connectionState == ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
+                          return Center(
+                            child: Icon(
+                              Icons.person,
+                              color: primaryColor,
+                              size: 200,
+                            ),
+                          );
+                        }
+                        if (image.hasError) {
+                          return Center(
+                              child: Text('Failed to load picture',
+                                  style:
+                                      Theme.of(context).textTheme.subtitle1));
                         }
                         if (image.hasData) {
                           return Image.network(
@@ -300,6 +312,7 @@ class _ProfilePageState extends State<ProfilePage> {
       url = await ref.getDownloadURL();
       print('url foto profile: $url');
     } on FirebaseException catch (e) {
+      Text('error loading picture');
       print(e);
     }
     return url;

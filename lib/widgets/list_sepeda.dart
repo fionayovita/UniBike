@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unibike/api/api_service.dart';
+import 'package:unibike/common/styles.dart';
 import 'package:unibike/provider/bike_provider.dart';
 import 'package:unibike/widgets/card_sepeda.dart';
 
@@ -37,8 +38,15 @@ class ListSepeda extends StatelessWidget {
             return Center(child: Text(state.message));
           } else if (state.state == ResultState.Error) {
             return Center(
-                child:
-                    Text(state.message, style: TextStyle(color: Colors.black)));
+                child: Column(
+              children: <Widget>[
+                CircleAvatar(
+                  child: Icon(Icons.wifi_off, color: primaryColor),
+                  backgroundColor: secondaryColor,
+                ),
+                Text('Tidak ada koneksi', style: TextStyle(color: Colors.black))
+              ],
+            ));
           } else {
             return Center(
                 child: Text('error', style: TextStyle(color: Colors.black)));
