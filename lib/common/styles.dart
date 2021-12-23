@@ -11,21 +11,27 @@ Color greyOutline = Color(0xFF3B3A42);
 
 final TextTheme myTextTheme = TextTheme(
   headline1: GoogleFonts.poppins(
-      fontSize: 45,
-      fontWeight: FontWeight.bold,
-      letterSpacing: 0.25,
-      color: secondaryColor),
+    fontSize: 45,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.25,
+    color: secondaryColor),
   headline2: GoogleFonts.poppins(
-      fontSize: 32,
-      fontWeight: FontWeight.bold,
-      letterSpacing: 0.25,
-      color: darkPrimaryColor),
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.25,
+    color: darkPrimaryColor),
   headline3: GoogleFonts.poppins(
-      fontSize: 23, fontWeight: FontWeight.bold, color: primaryColor),
+    fontSize: 23,
+    fontWeight: FontWeight.bold,
+    color: primaryColor),
   headline4: GoogleFonts.poppins(
-      fontSize: 21, fontWeight: FontWeight.bold, color: primaryColor),
+    fontSize: 21,
+    fontWeight: FontWeight.bold,
+    color: primaryColor),
   headline5: GoogleFonts.poppins(
-      fontSize: 18, fontWeight: FontWeight.bold, color: darkPrimaryColor),
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: darkPrimaryColor),
   headline6: GoogleFonts.rubik(
       fontSize: 18,
       fontWeight: FontWeight.w500,

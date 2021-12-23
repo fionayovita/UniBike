@@ -30,10 +30,10 @@ class _MainPageState extends State<MainPage> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 17.0, vertical: 20.0),
                     child: _textField(context));
-              } else if (constraints.maxWidth <= 1500) {
+              } else if (constraints.maxWidth <= 1100) {
                 return Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 200.0, vertical: 20.0),
+                        horizontal: 80.0, vertical: 20.0),
                     child: _textField(context));
               } else {
                 return Padding(

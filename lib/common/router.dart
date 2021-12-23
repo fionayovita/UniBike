@@ -30,14 +30,16 @@ class RouterHelper {
       case MainPage.routeName:
         return MaterialPageRoute(builder: (_) => MainPage());
       case BikeDetailPage.routeName:
-        return MaterialPageRoute(builder: (BuildContext context) {
-          final args = settings.arguments as CardSepedaArgs;
-          CardSepedaArgs argument = args;
-          return BikeDetailPage(
-            bike: argument.bike,
-            fakultas: argument.fakultas as String,
-          );
-        });
+        return MaterialPageRoute(
+          builder: (BuildContext context) {
+            final args = settings.arguments as CardSepedaArgs;
+            CardSepedaArgs argument = args;
+            return BikeDetailPage(
+              bike: argument.bike,
+              fakultas: argument.fakultas as String,
+            );
+          },
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

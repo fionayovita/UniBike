@@ -70,6 +70,7 @@ class NotificationHelper {
     selectNotificationSubject.stream.listen(
       (String payload) async {
         Navigation.intentWithData(StatusPinjamPage.routeName);
+        print('Clicked notification');
       },
     );
   }

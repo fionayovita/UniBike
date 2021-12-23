@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unibike/common/styles.dart';
@@ -37,13 +36,14 @@ class _CustomDialogState extends State<CustomDialog> {
               left: 12.0, top: 50.0 + 12.0, right: 12.0, bottom: 10),
           margin: EdgeInsets.only(top: 50.0),
           decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: primaryColor,
-              borderRadius: BorderRadius.circular(12.0),
-              boxShadow: [
-                BoxShadow(
-                    color: greyOutline, offset: Offset(0, 10), blurRadius: 10),
-              ]),
+            shape: BoxShape.rectangle,
+            color: primaryColor,
+            borderRadius: BorderRadius.circular(12.0),
+            boxShadow: [
+              BoxShadow(
+                  color: greyOutline, offset: Offset(0, 10), blurRadius: 10),
+            ],
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -62,13 +62,14 @@ class _CustomDialogState extends State<CustomDialog> {
               Align(
                 alignment: Alignment.bottomRight,
                 child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      widget.text,
-                      style: Theme.of(context).textTheme.subtitle1,
-                    )),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    widget.text,
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                ),
               ),
             ],
           ),

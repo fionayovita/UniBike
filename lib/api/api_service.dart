@@ -13,11 +13,10 @@ class ApiService {
     final response = await http.get(Uri.parse(
         _baseUrl + _search + 'page=' + _page + '&per_page=' + _per_page));
     if (response.statusCode == 200) {
-      print(_baseUrl + _search + 'page=' + _page + '&per_page=' + _per_page);
-      print(response.body);
+      print('Successful to load bikeresult');
       return BikeResult.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load top headlines');
+      throw Exception('Failed to load bikeresult');
     }
   }
 }

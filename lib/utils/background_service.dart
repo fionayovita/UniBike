@@ -1,8 +1,5 @@
 import 'dart:isolate';
-
 import 'dart:ui';
-
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:unibike/api/api_service.dart';
 import 'package:unibike/main.dart';
 import 'package:unibike/utils/notifications_helper.dart';

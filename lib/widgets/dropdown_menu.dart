@@ -7,9 +7,6 @@ typedef OnChangeCallback = void Function(dynamic value);
 
 class DropDownMenu extends StatefulWidget {
   String fakultasMain = '';
-  final OnChangeCallback onChanged;
-
-  DropDownMenu({required this.onChanged});
 
   @override
   State<DropDownMenu> createState() => DropDownMenuState();
@@ -94,7 +91,7 @@ class DropDownMenuState extends State<DropDownMenu> {
                     () {
                       fakultas = value as String;
                       widget.fakultasMain = value;
-                      widget.onChanged(value);
+  
                       lengthBike = lengthFakultas();
                       ListSepeda(
                           length: lengthBike, gridCount: 4, fakultas: fakultas);
@@ -133,15 +130,15 @@ class DropDownMenuState extends State<DropDownMenu> {
                             gridCount: 2,
                             fakultas: fakultas,
                           );
-                        } else if (constraints.maxWidth <= 1500) {
+                        } else if (constraints.maxWidth <= 1100) {
                           return ListSepeda(
                               length: lengthBike,
-                              gridCount: 4,
+                              gridCount: 3,
                               fakultas: fakultas);
                         } else {
                           return ListSepeda(
                               length: lengthBike,
-                              gridCount: 6,
+                              gridCount: 5,
                               fakultas: fakultas);
                         }
                       },

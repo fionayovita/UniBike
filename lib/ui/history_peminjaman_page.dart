@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:unibike/common/styles.dart';
 import 'package:unibike/widgets/card_history.dart';
 
 class HistoryPeminjamanPage extends StatelessWidget {
@@ -29,8 +28,26 @@ class HistoryPeminjamanPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Center(
-          child: Padding(
-              padding: const EdgeInsets.all(0.0), child: _listPinjam(context)),
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxWidth <= 700) {
+                return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 17.0, vertical: 20.0),
+                    child: _listPinjam(context));
+              } else if (constraints.maxWidth <= 1100) {
+                return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 70.0, vertical: 20.0),
+                    child: _listPinjam(context));
+              } else {
+                return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 550.0, vertical: 20.0),
+                    child: _listPinjam(context));
+              }
+            },
+          ),
         ),
       ),
     );
@@ -44,42 +61,46 @@ class HistoryPeminjamanPage extends StatelessWidget {
             .collection('user_history')
             .snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Column(
-                children: <Widget>[
-                  Image.asset(
-                    'assets/logoBulet.png',
-                    width: 250,
-                    height: 250,
-                  ),
-                  SizedBox(height: 15.0),
-                  Text(
-                      'Terjadi kesalahan, silahkan kembali ke halaman sebelumnya.',
-                      style: Theme.of(context).textTheme.headline5)
-                ],
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Image.asset(
+                      'assets/logoBulet.png',
+                      width: 250,
+                      height: 250,
+                    ),
+                    SizedBox(height: 15.0),
+                    Text(
+                        'Terjadi kesalahan, silahkan kembali ke halaman sebelumnya.',
+                        style: Theme.of(context).textTheme.headline5)
+                  ],
+                ),
               ),
             );
-          }
-          if (!snapshot.hasData) {
-            return Center(
-              child: Column(
-                children: <Widget>[
-                  Image.asset(
-                    'assets/logoBulet.png',
-                    width: 250,
-                    height: 250,
-                  ),
-                  SizedBox(height: 15.0),
-                  Text('Tidak ada riwayat peminjaman',
-                      style: Theme.of(context).textTheme.headline5)
-                ],
+          } else if (!snapshot.hasData) {
+            return SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Image.asset(
+                      'assets/logoBulet.png',
+                      width: 250,
+                      height: 250,
+                    ),
+                    SizedBox(height: 15.0),
+                    Text('Tidak ada riwayat peminjaman',
+                        style: Theme.of(context).textTheme.headline5)
+                  ],
+                ),
               ),
             );
           }
 
-          return snapshot.hasData &&
-                  snapshot.connectionState == ConnectionState.done
+          return snapshot.hasData
               ? ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
@@ -96,18 +117,20 @@ class HistoryPeminjamanPage extends StatelessWidget {
                         waktuKembali: waktuKembali);
                   },
                 )
-              : Center(
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/logoBulet.png',
-                        width: 250,
-                        height: 250,
-                      ),
-                      SizedBox(height: 15.0),
-                      Text('Tidak ada riwayat peminjaman.',
-                          style: Theme.of(context).textTheme.headline5)
-                    ],
+              : SingleChildScrollView(
+                  child: Center(
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/logoBulet.png',
+                          width: 250,
+                          height: 250,
+                        ),
+                        SizedBox(height: 15.0),
+                        Text('Tidak ada riwayat peminjaman.',
+                            style: Theme.of(context).textTheme.headline5)
+                      ],
+                    ),
                   ),
                 );
         },

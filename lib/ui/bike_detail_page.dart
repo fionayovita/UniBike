@@ -8,9 +8,7 @@ import 'package:unibike/common/styles.dart';
 import 'package:unibike/model/bike_model.dart';
 import 'package:unibike/provider/alarm_provider.dart';
 import 'package:unibike/provider/preferences_provider.dart';
-import 'package:unibike/ui/status_pinjam_page.dart';
 import 'package:unibike/widgets/custom_dialog.dart';
-import 'package:unibike/widgets/dropdown_menu.dart';
 
 class BikeDetailPage extends StatefulWidget {
   static const routeName = 'detail_page';
@@ -44,12 +42,12 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
             } else if (constraints.maxWidth <= 1100) {
               return Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 100.0, vertical: 20.0),
+                      horizontal: 70.0, vertical: 20.0),
                   child: _textField(context));
             } else {
               return Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 400.0, vertical: 20.0),
+                      horizontal: 100.0, vertical: 20.0),
                   child: _textField(context));
             }
           },
@@ -157,7 +155,7 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
                                 },
                               );
 
-                              scheduled.scheduledNews(true);
+                              scheduled.scheduledReminder(true);
                               provider.enableAlarm(true);
 
                               showDialog(
@@ -187,7 +185,6 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
                               setState(
                                 () {
                                   widget.fakultas;
-                                  print('di finally: ${widget.fakultas}');
                                 },
                               );
                             }

@@ -39,15 +39,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25.0, vertical: 20.0),
                   child: _textField(context));
-            } else if (constraints.maxWidth <= 1500) {
+            } else if (constraints.maxWidth <= 1100) {
               return Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 200.0, vertical: 20.0),
+                      horizontal: 120.0, vertical: 20.0),
                   child: _textField(context));
             } else {
               return Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 550.0, vertical: 20.0),
+                      horizontal: 200.0, vertical: 20.0),
                   child: _textField(context));
             }
           },
@@ -73,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           SizedBox(height: 24.0),
           Text(
-            'Create your account',
+            'Buat akun baru',
             style: Theme.of(context).textTheme.subtitle2,
           ),
           SizedBox(height: 8.0),
@@ -85,7 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (text != null && text.isNotEmpty) {
                 return null;
               } else {
-                return 'Email Can\'t Be Empty';
+                return 'Email tidak boleh kosong!';
               }
             },
             decoration: InputDecoration(
@@ -103,11 +103,11 @@ class _RegisterPageState extends State<RegisterPage> {
               if (text != null && text.isNotEmpty) {
                 return null;
               } else {
-                return 'Password Can\'t Be Empty';
+                return 'Kata Sandi tidak boleh kosong!';
               }
             },
             decoration: InputDecoration(
-              hintText: 'Password',
+              hintText: 'Kata Sandi',
               hintStyle: Theme.of(context).textTheme.subtitle2,
             ),
           ),
@@ -119,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (text != null && text.isNotEmpty) {
                 return null;
               } else {
-                return 'Nama Can\'t Be Empty';
+                return 'Nama tidak boleh kosong!';
               }
             },
             decoration: InputDecoration(
@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (text != null && text.isNotEmpty) {
                 return null;
               } else {
-                return 'NPM Can\'t Be Empty';
+                return 'NPM tidak boleh kosong!';
               }
             },
             decoration: InputDecoration(
@@ -151,7 +151,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (text != null && text.isNotEmpty) {
                 return null;
               } else {
-                return 'Program Studi Can\'t Be Empty';
+                return 'Program Studi tidak boleh kosong!';
               }
             },
             decoration: InputDecoration(
@@ -168,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (text != null && text.isNotEmpty) {
                 return null;
               } else {
-                return 'Fakultas Can\'t Be Empty';
+                return 'Fakultas tidak boleh kosong!';
               }
             },
             decoration: InputDecoration(
@@ -178,7 +178,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           SizedBox(height: 24.0),
           MaterialButton(
-            child: Text('Register'),
+            child: Text('Daftar'),
             color: Theme.of(context).primaryColor,
             textTheme: ButtonTextTheme.primary,
             height: 53,
@@ -226,7 +226,7 @@ class _RegisterPageState extends State<RegisterPage> {
             },
           ),
           TextButton(
-            child: Text('Already have an account? Login',
+            child: Text('Sudah punya akun? Login',
                 style: TextStyle(color: secondaryColor)),
             onPressed: () => Navigator.pop(context),
           ),

@@ -8,13 +8,13 @@ class SchedulingProvider extends ChangeNotifier {
 
   bool get isScheduled => _isScheduled;
 
-  Future<bool> scheduledNews(bool value) async {
+  Future<bool> scheduledReminder(bool value) async {
     _isScheduled = value;
     if (_isScheduled) {
-      print('Scheduling News Activated');
+      print('Reminder Alarm Activated');
       notifyListeners();
       return await AndroidAlarmManager.periodic(
-        Duration(minutes: 1),
+        Duration(hours: 2),
         1,
         BackgroundService.callback,
         startAt: DateTimeHelper.formatWaktu(),
@@ -22,7 +22,7 @@ class SchedulingProvider extends ChangeNotifier {
         wakeup: true,
       );
     } else {
-      print('Scheduling News Canceled');
+      print('Reminder Alarm Canceled');
       notifyListeners();
       return await AndroidAlarmManager.cancel(1);
     }

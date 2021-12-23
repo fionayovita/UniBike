@@ -1,6 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeHelper {
@@ -15,7 +12,6 @@ class DateTimeHelper {
     var kembali = now.add(Duration(hours: 2));
     final dateFormatKembali = dateFormat.format(kembali);
     var resultEnd = dateFormat.parseStrict(dateFormatKembali);
-
     return now.isAfter(resultNow) ? resultEnd : resultNow;
   }
 }

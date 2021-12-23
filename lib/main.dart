@@ -11,18 +11,10 @@ import 'package:unibike/common/styles.dart';
 import 'package:unibike/preferences/preferences_helper.dart';
 import 'package:unibike/provider/alarm_provider.dart';
 import 'package:unibike/provider/preferences_provider.dart';
-import 'package:unibike/ui/bike_detail_page.dart';
-import 'package:unibike/ui/home_page.dart';
-import 'package:unibike/ui/login_page.dart';
-import 'package:unibike/ui/main_page.dart';
-import 'package:unibike/ui/profile_page.dart';
-import 'package:unibike/ui/register_page.dart';
 import 'package:unibike/ui/splash_screen.dart';
-import 'package:unibike/ui/status_pinjam_page.dart';
 import 'package:unibike/utils/background_service.dart';
 import 'package:unibike/utils/notifications_helper.dart';
 
-import 'model/bike_model.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
