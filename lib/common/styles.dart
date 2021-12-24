@@ -74,7 +74,7 @@ final themeData = ThemeData(
         primary: secondaryColor,
         textStyle: TextStyle(),
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(25)))),
+            borderRadius: BorderRadius.all(Radius.circular(10)))),
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     selectedItemColor: secondaryColor,
@@ -84,22 +84,22 @@ final themeData = ThemeData(
     fillColor: Colors.amber,
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(width: 2.0, color: greyOutline),
-      borderRadius: BorderRadius.circular(25),
+      borderRadius: BorderRadius.circular(12),
     ),
     disabledBorder: OutlineInputBorder(
       borderSide: BorderSide(width: 2.0, color: Colors.red),
-      borderRadius: BorderRadius.circular(25),
+      borderRadius: BorderRadius.circular(12),
     ),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(25.0),
+      borderRadius: BorderRadius.circular(12.0),
       borderSide: BorderSide(color: greyOutline, width: 2.0),
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(25.0),
+      borderRadius: BorderRadius.circular(12.0),
       borderSide: BorderSide(color: primaryColor, width: 2.0),
     ),
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(25.0),
+      borderRadius: BorderRadius.circular(12.0),
       borderSide: BorderSide(color: Colors.red, width: 2.0),
     ),
   ),
