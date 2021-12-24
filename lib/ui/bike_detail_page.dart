@@ -75,7 +75,7 @@ class _BikeDetailPageState extends State<BikeDetailPage> {
           ),
         ),
         Container(
-          margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+          margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
           child: CircleAvatar(
             backgroundColor: secondaryColor,
             child: IconButton(
